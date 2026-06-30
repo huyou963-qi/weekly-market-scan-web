@@ -1,0 +1,14 @@
+{
+  "weekEnding": "2026-06-26",
+  "title": "防御轮动确认，AI 链 consolidation",
+  "regime": "Rotation / Stagflation-lite",
+  "regimeConfidence": "M",
+  "scope": "US+CN",
+  "generatedAt": "2026-06-26 20:15 CST",
+  "summaryOneLiner": "FROM XLK → TO XLV；HY OAS +12bp，SPX 跌破 50-DMA",
+  "kpis": [
+    { "label": "HY OAS", "value": "278bp", "delta": "+12bp", "dir": "up" },
+    { "label": "10Y-2Y", "value": "0.31%", "delta": "+4bp", "dir": "up" },
+    { "label": "VIX", "value": "18.4", "delta": "-1.2", "dir": "down" }
+  ]
+}
