@@ -2,6 +2,8 @@
 
 ## Cross-asset minimum set
 
+**Out of scope (weekly-market-scan-web)**: A-share (CSI 300, 沪深) and Hong Kong equities (HSI, 2800.HK). Do not add CN/HK index rows to the dashboard or dedicate report sections to onshore/offshore China stock markets.
+
 ### Equities
 
 | Region | Index / ETF | Role |
@@ -10,8 +12,6 @@
 | US growth | NDX, QQQ | Tech/growth proxy |
 | US small | RUT, IWM | Risk appetite / credit sensitivity |
 | US value | — or RPV/IWD | Style leg |
-| China A | CSI 300, 000300.SS | Onshore risk (if in scope) |
-| HK | HSI, 2800.HK | Offshore China / Asia |
 | Europe | STOXX 600, DAX | Global cycle |
 | Japan | N225, 1321.T | Yen / carry context |
 | EM | EEM, VWO | Dollar / commodity beta |
