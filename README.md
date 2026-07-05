@@ -1,6 +1,6 @@
 # weekly-market-scan-web
 
-Cursor Agent Skill：生成交易员级**周度跨资产市场扫描**，并 **POST 到 finance-site** 的「AI周度观察」页面（`/weekly`）。
+Cursor Agent Skill：生成交易员级**周度跨资产市场扫描**（**全球宏观 + 美股**；**不含 A股、港股**），并 **POST 到 finance-site** 的「AI周度观察」页面（`/weekly`）。
 
 基于 [weekly-market-scan](https://github.com/huyou963-qi/weekly-market-scan)，去掉 Slack / 微信等通道，仅保留网站投递（Demo B：`meta` + `bodyMarkdown`）。
 

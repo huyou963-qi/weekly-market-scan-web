@@ -11,7 +11,7 @@ The website **only ingests and renders** reports. It does not fetch FRED or mark
     "title": "string",
     "regime": "string",
     "regimeConfidence": "H | M | L",
-    "scope": "US | US+CN | Global",
+    "scope": "US | Global",
     "generatedAt": "YYYY-MM-DD HH:MM timezone",
     "summaryOneLiner": "string",
     "kpis": [
@@ -30,7 +30,7 @@ The website **only ingests and renders** reports. It does not fetch FRED or mark
 | `title` | Synthesize from exec summary | ≤80 chars, 中文 preferred |
 | `regime` | Step 8 primary regime | Free text OK (AI may blend labels) |
 | `regimeConfidence` | Step 8 H/M/L | |
-| `scope` | Header「覆盖范围」 | |
+| `scope` | Header「覆盖范围」 | `US` or `Global` only — no `US+CN`; A-share/HK out of scope |
 | `generatedAt` | Header「生成时间」 | |
 | `summaryOneLiner` | Exec bullets 3+4 compressed | Rotation + key risk |
 | `kpis` | Step 7 risk dashboard | **Minimum 3**: HY OAS, 10Y-2Y, VIX |

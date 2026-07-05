@@ -21,7 +21,7 @@ Output is always two parts (Demo B):
 
 **Do not** generate Slack summaries, WeChat push copy, or channel-specific formats. The website is the sole delivery channel.
 
-Default market scope: **global macro + US equities** unless the user specifies A-share / HK / Europe-only focus.
+Default market scope: **global macro + US equities**. **Out of scope**: A-share (A股) and Hong Kong equities (港股) — do not fetch, analyze, or report CSI 300, HSI, AH names, or CN/HK-specific narratives unless the user explicitly overrides.
 
 ---
 
@@ -53,6 +53,7 @@ Weekly Scan (Web) Progress:
 
 - **Period**: prior trading week (Mon open → Fri close) in user's timezone; if run on weekend, label "week ending [date]".
 - **Benchmarks**: S&P 500, Nasdaq, Russell 2000 (or user-specified).
+- **Out of scope**: A-share (A股) and Hong Kong equities (港股) — no CSI 300 / HSI coverage, no CN/HK stock narratives.
 - **Universe extras**: user watchlist, index top weights, names with >5% weekly move or >2σ volume.
 - **Prior week carry-over**: if memory or last report exists, note unresolved themes.
 
@@ -117,6 +118,7 @@ Before delivery:
 - [ ] No fabricated consensus numbers
 - [ ] Report fits [weekly-report.md](templates/weekly-report.md) structure
 - [ ] **meta** fields derived from report (not invented separately)
+- [ ] **No A-share / HK** index, ticker, or dedicated narrative sections (unless user explicitly overrides scope)
 - [ ] `meta.weekEnding` matches report header Friday date
 - [ ] `meta.kpis` includes at least HY OAS, 10Y-2Y, VIX
 
@@ -178,7 +180,7 @@ When the user wants a **scheduled weekly Cursor Automation**, read the **automat
 
 ### User config to collect before drafting automation
 
-1. **Markets**: US only / US+CN / global → `meta.scope`
+1. **Markets**: US only / global (default: US + global macro; **no A-share / HK**) → `meta.scope`
 2. **Watchlist**: tickers or "use memory"
 3. **API URL**: default `https://hblook.com`
 4. **Schedule**: day + time + timezone

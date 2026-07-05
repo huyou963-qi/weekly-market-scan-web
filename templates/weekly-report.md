@@ -2,7 +2,7 @@
 
 **报告周期**: [Week ending YYYY-MM-DD]  
 **生成时间**: [YYYY-MM-DD HH:MM timezone]  
-**覆盖范围**: [US / US+CN / Global]  
+**覆盖范围**: [US / Global — 不含 A股、港股]
 **数据截止**: [as-of notes per section]
 
 ---
