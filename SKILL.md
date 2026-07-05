@@ -35,6 +35,7 @@ Weekly Scan (Web) Progress:
 - [ ] 1a. FRED pull (HY OAS + 10Y-2Y) — MCP or scripts/fetch_fred.py
 - [ ] 1. Cross-asset dashboard
 - [ ] 2. Macro & policy recap
+- [ ] 2b. Macro news & speeches recall (2.1.2)
 - [ ] 3. Equity market structure
 - [ ] 4. Sector & industry rotation
 - [ ] 4.5. AI supply chain (HBM, cloud GPU, API pricing, capex)
@@ -71,7 +72,24 @@ Fetch **before** filling credit/curve fields. Full spec: [fred-data.md](referenc
 
 If FRED unavailable after all paths: write `FRED 未连接` and use HYG/LQD ETF spread as **proxy only**.
 
-### Steps 1–10 — Analysis content
+### Step 2 — Macro & policy recap
+
+**2.1 本周回顾** has two parts — both mandatory:
+
+| Subsection | Content |
+|------------|---------|
+| **2.1.1 数据发布** | Scheduled prints (NFP, CPI, PMI, etc.) — actual vs consensus, market reaction |
+| **2.1.2 要闻、讲话与政策动态** | Speeches, forums, policy/geopolitical headlines that moved cross-asset prices same day |
+
+Full inclusion rules, thresholds, and research workflow: [macro-news-recall.md](reference/macro-news-recall.md).
+
+Before writing 2.1: web-search the week's **speaker calendars + major headlines**; cross-check ≥2 sources; link same-day moves in rates/FX/vol/equities. Example: Fed official at **ECB Forum** mid-week → row in 2.1.2 even when no data release that day.
+
+**2.1.2 silence**: if nothing meets threshold, state explicitly under the subsection — do not omit the header.
+
+**2.2 下周日历**: upcoming events with H/M/L impact.
+
+### Steps 1–10 — Analysis content (continued)
 
 Same requirements as the core weekly scan. Reference:
 
@@ -85,11 +103,13 @@ Key reminders:
 - **Step 8** Regime must include confidence (H/M/L) and falsifiers — feeds `meta.regime`.
 - **Step 10** Playbook must have invalidation levels.
 - Label 事实 / 解读 / 判断; every number needs as-of date.
+- **Step 2 / 2.1.2**: include market-moving speeches & news per [macro-news-recall.md](reference/macro-news-recall.md); data-only 2.1 is incomplete.
 
 ### Step 11 — Quality gate
 
 Before delivery:
 
+- [ ] **2.1.2** filled with news/speeches OR explicit "no threshold event" note
 - [ ] **HY OAS + 10Y-2Y** from FRED (or proxy labeled) with 1W Δ in bp
 - [ ] **Step 4.5** AI tables filled or explicitly "no new print this week"
 - [ ] Every price/level has **as-of date** and source class
@@ -151,6 +171,7 @@ When the user wants a **scheduled weekly Cursor Automation**, read the **automat
 - Agent **must** compare to prior run if memory enabled
 - Agent **must** pull HY OAS + 10Y-2Y via FRED before credit/curve fields
 - Agent **must** run Step 4.5 AI supply chain tracker
+- Agent **must** research **2.1.2** news/speeches (forums, Fed/ECB remarks, policy headlines) per [macro-news-recall.md](reference/macro-news-recall.md)
 - Agent **must not** invent data
 - Agent **must not** post to Slack, WeChat, or other channels
 - Output: `meta` + `bodyMarkdown` in run output **and** POST to site
@@ -185,5 +206,6 @@ When the user wants a **scheduled weekly Cursor Automation**, read the **automat
 - AI supply chain: [ai-supply-chain.md](reference/ai-supply-chain.md)
 - FRED fetch script: [scripts/fetch_fred.py](scripts/fetch_fred.py)
 - Coverage & thresholds: [coverage-matrix.md](reference/coverage-matrix.md)
+- Macro news & speeches (2.1.2): [macro-news-recall.md](reference/macro-news-recall.md)
 - Automation prompt: [automation-prompt.md](templates/automation-prompt.md)
 - Report template: [weekly-report.md](templates/weekly-report.md)

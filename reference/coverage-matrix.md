@@ -106,6 +106,7 @@ Examples: Semiconductors vs Software; Banks vs Insurance; E&P vs Refiners; Homeb
 - Megacap earnings (AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA — adjust list)
 - Geopolitical shock with energy/trade channel
 - Credit event (bank stress, sovereign, large default)
+- **Market-moving speeches & headlines** — Fed/ECB/BOJ chair or key officials at major forums (ECB Forum Sintra, Jackson Hole); surprise tariff/sanction/fiscal headlines; systemic regulatory actions (see [macro-news-recall.md](macro-news-recall.md) → **2.1.2**)
 
 ### Tier 2 (table row + sector tag)
 
@@ -113,12 +114,15 @@ Examples: Semiconductors vs Software; Banks vs Insurance; E&P vs Refiners; Homeb
 - ECB/BOJ/PBoC decisions
 - Sector-heavy earnings week
 - OPEX / index rebalance
+- **Scheduled Fed/ECB speaker slots** (non-chair) when same-day cross-asset move meets threshold → **2.1.2**
+- **Policy process news** (debt ceiling, budget vote, trade negotiation milestone) with FX/rates reaction
 
 ### Tier 3 (calendar mention only)
 
 - Single mid-cap earnings
 - Minor regulatory filing
 - Low-impact international data
+- Routine Fed governor remarks with no measurable cross-asset move
 
 ---
 

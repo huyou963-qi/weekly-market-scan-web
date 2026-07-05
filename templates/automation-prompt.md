@@ -35,6 +35,15 @@ HBM/DRAM, cloud GPU $/hr, AI API pricing, hyperscaler capex. Compare vs last run
 
 Web search for equities, sectors, VIX, commodities, calendar.
 
+### 4. Macro news & speeches — Step 2.1.2 (mandatory)
+
+Per [macro-news-recall.md](../reference/macro-news-recall.md):
+
+- Scan the week for **central bank / official speeches** (ECB Forum, Fed speakers, Treasury), **policy headlines**, **geopolitical** items.
+- Include any item with same-day cross-asset impact (rates, DXY, SPX, VIX, gold) in **2.1.2**.
+- Cross-check ≥2 sources; primary transcript preferred for quotes.
+- If none qualify, write explicit silence note — do not skip the subsection.
+
 ## Memory (if enabled)
 
 Compare to last run: regime, rotation, AI/capex trends, credit levels. Mention changes in exec summary and `meta.summaryOneLiner`.
@@ -43,7 +52,7 @@ Compare to last run: regime, rotation, AI/capex trends, credit levels. Mention c
 
 1. Executive summary — 5 bullets
 2. Cross-asset dashboard — FRED HY OAS + T10Y2Y
-3. Macro recap + next-week calendar (H/M/L)
+3. Macro recap — **2.1.1 data + 2.1.2 news/speeches** + next-week calendar (H/M/L)
 4. Equity market structure
 5. GICS sector rotation + sub-industry highlights
 6. AI supply chain 4.5 + synthesis

@@ -44,6 +44,7 @@ reference/
   web-delivery.md        # POST 规范
   fred-data.md
   coverage-matrix.md
+  macro-news-recall.md   # 2.1.2 要闻/讲话纳入规则
   ai-supply-chain.md
 scripts/
   fetch_fred.py          # FRED 拉取（需 FRED_API_KEY）
