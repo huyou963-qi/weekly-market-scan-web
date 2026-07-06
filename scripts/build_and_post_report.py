@@ -1,0 +1,371 @@
+#!/usr/bin/env python3
+"""Build weekly report payload and POST to hblook.com."""
+
+from __future__ import annotations
+
+import json
+import os
+import subprocess
+import sys
+import urllib.error
+import urllib.request
+
+BODY = r"""# 周度市场检测报告 | Weekly Market Scan
+
+**报告周期**: Week ending 2026-06-26  
+**生成时间**: 2026-06-30 14:40 CST  
+**覆盖范围**: US+CN  
+**数据截止**: 美股/利率/信用截至 2026-06-26 收盘；T10Y2Y FRED 最新观测 2026-06-29；AI 定价页访问 2026-06-30
+
+---
+
+## 执行摘要 | Executive Summary
+
+> 5 bullets max — what mattered, what changed, what to do next week.
+
+1. **Regime**: Mega Rotation — cap-weighted SPX 连跌五日（-2.0%），但 RUT / Equal-Weight 创历史新高，市场呈「指数弱、广度强」双速结构。
+2. **Top move**: Mag7 / AI 基础设施遭获利了结（NDX -4.6%），同时 MU 财报引爆 memory 链狂欢（GLW +30% 周度领涨）。
+3. **Rotation**: **FROM XLK / Mag7 / cyclical semis → TO XLV / value / small-cap / software (IGV)**
+4. **Key risk**: HY OAS 走阔至 **283bp（+17bp 1W，FRED）** + PCE core 3.4% YoY 粘性 → Fed hawkish 定价未解除；SPX 收盘跌破 50-DMA（~7,339）。
+5. **Playbook**: 维持防御偏中性仓位；关注 7,350 put wall / 7,435 gamma flip；下周短交易周 NFP（7/2）为波动催化剂。
+
+---
+
+## 1. 大类资产仪表盘 | Cross-Asset Dashboard
+
+| 资产 | 标的 | 1W | MTD | YTD | 52W区间位置 | 驱动 |
+|------|------|-----|-----|-----|-------------|------|
+| 美股 | SPX | -2.0% | ~-1.5% | +7.4% | 高位回落 | Mag7 拖累；广度逆势走强 |
+| | NDX | -4.6% | ~-3% | +8.8% | 中上区回调 | AI capex 质疑 + semi 分化 |
+| | RUT | +1.0% | +2% | +21.3% | **历史新高** | 小盘/value 轮动 |
+| 利率 | UST 10Y (FRED `DGS10`) | -8bp → 4.38% | -14bp | — | 中位 | 油价回落压低通胀预期 |
+| | **10Y-2Y (FRED `T10Y2Y`)** | +4bp → 0.31%* | +4bp | — | 正斜率收窄 | 2Y 跌幅大于 10Y；轻度 steepening |
+| 信用 | **HY OAS (FRED `BAMLH0A0HYM2`)** | **+17bp → 283bp** | +12bp | — | 走阔 | AI/tech 抛售 + IG 同步走阔 |
+| 外汇 | DXY | -0.1% → 101.33 | 高位震荡 | — | 52W 高位附近 | 油价跌 + 避险美元小幅回落 |
+| 商品 | WTI / Gold / Copper | WTI ~$69.7 / Gold ~$4,076 / Cu 稳 | 油大跌 | 油 +24% YTD | 油从高位回落 | Hormuz 通航恢复 |
+| 波动 | VIX | +1.6 → 18.41 | 回升 | — | 均值附近 | 指数连跌但 vol 受控 |
+
+\*10Y-2Y 0.31% 由 DGS10(4.38%) − DGS2(4.07%) 于 2026-06-26 推算；FRED `T10Y2Y` 最新 0.28%（as-of 2026-06-29）。
+
+**Cross-asset read**（解读）: 事实层面，股债同跌式 risk-off 并不成立——长端收益率下行、小盘股创新高、A/D line 创历史新高。真正发生的是 **Mag7 集中度 unwind**：指数层面 risk-off，广度层面 risk-on。信用（HY OAS +17bp）与 AI 估值回调同步，提示 liquidity 边际收紧但未达 stress 阈值（|Δ| < 25bp 警报线）。
+
+---
+
+## 2. 宏观与政策 | Macro & Policy
+
+### 2.1 本周回顾
+
+| 事件/数据 | 实际 vs 预期 | 市场反应 | 解读 |
+|-----------|--------------|----------|------|
+| PCE（5月） | Headline 4.1% YoY / Core 3.4% YoY；符合预期 | 长端收益率小幅下行 | **事实**: 通胀粘性未消；**解读**: Fed higher-for-longer 叙事维持 |
+| PCE 消费 | Spending +0.7% MoM，超预期 | 周期股相对抗跌 | 消费韧性支撑软着陆预期 |
+| Q1 GDP 终值 | 2.1% SAAR（上修自 1.6%） | 温和 risk-on | 进口下修机械推高 headline |
+| Initial Claims（6/20周） | 215k vs 225k 预期 | 美元偏强 | 劳动力市场降温但未恶化 |
+| 中东/油价 | Hormuz 通航恢复，Brent 回到战前水平 | 能源股跑输；收益率下行 | 地缘溢价快速消退 |
+| Micron FQ3 财报 | 营收/EPS 大幅 beat；$22B 客户预付款 | MU +16% 周度；但周五 memory 回吐 | AI memory 供需紧张确认 |
+
+### 2.2 下周日历
+
+| 日期 | 事件 | 影响等级 H/M/L | 关注资产/行业 |
+|------|------|----------------|---------------|
+| 7/1 (三) | ADP 就业、ISM Manufacturing PMI | **H** | XLI、美元、利率 |
+| 7/1 (三) | Fed Chair Warsh — ECB Sintra 论坛 | **H** | 全资产；Fed 沟通风格 |
+| 7/2 (四) | **NFP 非农就业（原 7/3 前移）** | **H** | SPX、HY、美元 |
+| 7/2 (四) | 初请失业金 | M | 劳动力 |
+| 7/3 (五) | **美国市场休市**（独立日） | L | 流动性偏薄 |
+| 7/3 (五) | Nike 财报 | M | XLY、消费 |
+
+**Macro narrative**（解读）: 本周数据组合为「增长不差 + 通胀粘性 + 油价回落」。市场不再交易衰退，而是交易 **AI capex ROI 与 memory 成本传导**。Fed 9 月加息概率仍高（FXStreet 引 ~72% 概率 +25bp），但油价下跌为通胀前景提供边际缓和。下周因独立日仅有 4 个交易日，NFP 前移 + 季末/半年再平衡或放大波动。
+
+---
+
+## 3. 股市结构 | Equity Market Structure
+
+| 指标 | 数值 | 1W Δ | 信号 |
+|------|------|------|------|
+| 上涨/下跌家数（周五） | 3,337 / 1,470（68% 上涨） | 改善 | 指数跌但内部偏强 |
+| NH/NL | 35 NH / 5 NL（SPX 成分） | 正面 | 连跌日中广度不弱 |
+| >50DMA 占比 | ~51.5% | 下滑 | SPX 跌破自身 50-DMA |
+| >200DMA 占比 | ~49.8% | 持平 | 长期趋势仍分化 |
+| 指数涨幅中 Top10 贡献 | Mag7 拖累 ~2% | 转负 | 集中度风险兑现 |
+
+**Style / factor**: Growth vs Value — Value +2.2% vs Growth -2.6%（Morningstar）；Large -3.0% vs Small +1.7%。**Large vs Small** 剪刀差扩大至年内极值。**判断**: 2023-25 AI 集中度交易进入阶段性 unwind，而非全面 bear market。
+
+**Flow / positioning**: 截至 6/24 一周，美国股票基金净流出 $3.53B；科技板块基金单周赎回近 $20B（LSEG Lipper/Reuters）。Mag7 ETF（MAGS）YTD 约 -7%，而 ex-Mag7 指数 YTD +2.6%（Barron's）。
+
+**Structure read**: SPX A/D line 于 6/26 创历史新高（Four Dimension Trading），与 cap-weighted SPX -2% 形成经典 divergence。**指数弱、广度强** — 若 7,339 50-DMA 守住，偏向震荡筑底；若跌破 7,200，negative gamma 或加速。
+
+---
+
+## 4. 行业轮动 | Sector & Industry Rotation
+
+### 4.1 GICS 一级 — 相对 SPX
+
+| 行业 | ETF | 1W rel | MTD rel | 驱动标签 | RS趋势 |
+|------|-----|--------|---------|----------|--------|
+| Health Care | XLV | **+9.9%** | +6% | 防御轮动、政策避险 | ↑ |
+| Real Estate | XLRE | +6.2% | +2% | 利率下行受益 | ↑ |
+| Industrials | XLI | +0.5% | +4% | 周期复苏 | → |
+| Financials | XLF | +0.3% | +1% | 曲线 steepening | → |
+| Consumer Staples | XLP | +0.2% | -1% | 防御 | → |
+| Utilities | XLU | +0.1% | +1% | 债券替代 | → |
+| Materials | XLB | -0.3% | +2% | 商品回落 | ↓ |
+| Energy | XLE | -0.5% | -7% | 油价大跌 | ↓ |
+| Comm Services | XLC | -1.5% | -6% | Mag7 权重 | ↓ |
+| Cons Disc | XLY | -0.6% | -3% | 消费分化 | ↓ |
+| **Technology** | **XLK** | **-3.3%** | +2% | AI 质疑、semi 分化 | **↓** |
+
+*1W 绝对：XLV +7.88%、XLK -5.32%（Morningstar，截至 6/26）。*
+
+### 4.2 细分行业亮点
+
+**领涨**: Health Care / Biotech（TECH +28.5% 周度）— 防御资金 + 并购/研发催化；**Memory/Storage**（GLW +30%、MU +16%）— Micron 财报确认 HBM/DRAM 超级周期。
+
+**领跌**: IT Consulting（ACN -19%、CTSH -20%）— AI 颠覆担忧；**AI 基础设施估值**（PLTR -18%、ORCL -17%）— capex ROI 质疑；**Cyclical semis**（ON -26%、WDC -21%）— 获利了结。
+
+### 4.3 轮动结论
+
+**资金方向**: **FROM Mag7 / cyclical semis / AI infra → TO healthcare / value / small-cap / software**  
+**证据**: XLK 跑输 330bp+；RUT 创新高；IGV（software）周五 +4% while SOX 跌 5.3%；XLV 创年内最佳周。
+
+---
+
+## 4.5 AI 产业链 & Capex | AI Supply Chain Tracker
+
+### 4.5.1 HBM / 内存价格
+
+| 指标 | 本期 | 1W/1M Δ | 来源 | 解读 |
+|------|------|---------|------|------|
+| HBM3e 合约价 | 2026 全年定价按年锁定；2027 HBM4 谈判中 | 本周无新报价 | TrendForce 2026-06-02 | 供应商定价权极强；酝酿数倍涨幅 |
+| DRAM DDR5（合约） | Q2'26 预计 +58–63% QoQ | vs Q1 +93–98% 环比放缓但仍大涨 | TrendForce 2026-06-01 | AI server 挤占产能 |
+| HBM 供给评论 | HBM 晶圆利润率 1Q26 已低于 DDR5 64GB RDIMM | — | TrendForce / MU 财报 | 供应商有动力重谈 HBM 定价 |
+
+**本周**: 无 TrendForce 新一期合约价 print；Micron 披露客户预付 $22B 锁定供给，确认 **memory 卖方市场**。
+
+### 4.5.2 云 GPU 租赁价格 ($/GPU-hr)
+
+| 厂商 | SKU | On-demand | 1W Δ | 信号 |
+|------|-----|-----------|------|------|
+| AWS | p5.4xlarge (1×H100) | $6.88/hr | 0 | unchanged |
+| GCP | a3-highgpu-1g (1×H100) | $11.06/hr | 0 | unchanged |
+| Azure | NC40ads_H100_v5 (1×H100) | $6.98/hr | 0 | unchanged |
+| CoreWeave | HGX H100 (per GPU) | $6.16/hr | 0 | unchanged |
+
+*来源: 厂商定价页 / DevZero / Thunder Compute，访问 2026-06-30。Spot 折扣 70–90% 不等。*
+
+### 4.5.3 AI API 定价 ($/1M tokens)
+
+| 厂商 | Model | Input | Output | 本周变动? |
+|------|-------|-------|--------|-----------|
+| OpenAI | GPT-4o | $2.50 | $10.00 | **N** |
+| OpenAI | GPT-4o mini | $0.15 | $0.60 | **N** |
+| Anthropic | Claude Sonnet 4.x | $3.00 | $15.00 | **N** |
+| Google | Gemini 2.5 Pro | $1.25 | $5.00 | **N** |
+
+*来源: 各厂商官方 pricing 页，2026-06-30。*
+
+### 4.5.4 Hyperscaler AI Capex
+
+| 公司 | Capex / Guide | YoY | AI 评论 | 1W 更新 |
+|------|---------------|-----|---------|---------|
+| MSFT | ~$190B（2026 日历年） | ~+100% | Azure/OpenAI infra | 无新指引 |
+| GOOGL | $180–190B | ~+110% | TPU v6 / Gemini | 无新指引 |
+| AMZN | ~$200B | ~+100% | AWS Trainium / Anthropic | 无新指引 |
+| META | $125–145B | ~+80% | MTIA / Llama | 无新指引 |
+| **四家合计** | **~$725B** | **+77%** | 史上最大协调式 AI infra 投资 | unchanged since Q1 earnings |
+
+### 4.5.5 AI stack synthesis
+
+**Cost curve**: Memory 成本加速上行（DRAM Q2 +58–63% QoQ），GPU 租赁与 API 官方价本周持平 — **上游 memory 通胀 vs 下游算力/API 价格刚性**。Apple 上调 iPad/Mac 售价即为消费端传导实例。
+
+**Capex cycle**: $725B hyperscaler capex 仍在加速，但股价对 ROI 耐心耗尽 — **capex 周期仍在上升段，但 equity 定价进入质疑期**（ORCL/PLTR 周跌 16–18%）。
+
+**Margin chain**: 本周 margin 从 cloud/model 向 **memory（MU/SK Hynix）** 转移；cyclical semi（ON/TXN）遭双重挤压（需求担忧 + 估值回调）。
+
+**Market linkage**: SOX 周跌 7.9%（2008 以来最差周之一），但 MU/GLW 逆势 — **AI 链内部分化** 大于板块 beta。XLK -5.3% vs XLV +7.9% 确认资金撤离拥挤 AI 交易。
+
+---
+
+## 5. 重点事件与传导 | Events & Transmission
+
+| 日期 | 事件 | 一阶影响 | 二阶影响 | 定价状态 |
+|------|------|----------|----------|----------|
+| 6/23–26 | Mag7 / AI 股连跌 | NDX -4.6% | 因子轮动至 value/healthcare | 部分 price-in |
+| 6/25 | PCE 通胀 | 收益率下行 | Fed 降息预期未回升 | 已 price-in |
+| 6/25 | Micron 财报 beat | MU +15% 盘中 | Memory 链普涨、AAPL 成本担忧 | 已 price-in |
+| 6/26 | Apple 产品涨价 | AAPL -6% 周四 | 消费通胀担忧 | debated |
+| 6/26 | Iran/Hormuz 通航恢复 | 油价跌、XLE 弱 | 通胀预期缓和 | 快速 price-in |
+
+**Earnings tone**: 非正式财报季；Micron 为本周最重要 AI 上游 print — beat rate 高但下游（AAPL/MSFT）开始体现 **memory 成本压力**。
+
+---
+
+## 6. 重点股票 | Watchlist & Systemic Names
+
+### 6.1 观察列表（Mag7 + 本周 SPX 异动）
+
+| Ticker | 1W | 催化剂 | 技术位 | 观点 |
+|--------|-----|--------|--------|------|
+| NVDA | -3%* | 周中创历史新高后回落；AI capex 质疑 | S/R: $150 / $140 | 观望；关注 semi 情绪 |
+| AAPL | -1%* | 内存成本传导；产品涨价 | S/R: $290 / $270 | 成本挤压，防御偏空 |
+| MSFT | -5%* | Azure 稳但 capex $190B 压力 | S/R: $380 / $350 | 软件 vs infra 分化 |
+| GOOGL | -5%* | Cloud capex + 稀释担忧 | S/R: $350 / $320 | 估值消化中 |
+| AMZN | -5%* | AWS 增长 vs $200B capex | S/R: $230 / $210 | 中性 |
+| META | -5%* | 高 capex + 监管 | S/R: $560 / $520 | 中性偏空 |
+| TSLA | -7%* | 无近端催化 | S/R: $380 / $340 | 弱势 |
+| MU | **+16%** | HBM/DRAM 超级周期 | S/R: 高位震荡 | 多头趋势，波动加大 |
+| GLW | **+30%** | Optical/AI 基础设施 | 超买 | 短线注意回调 |
+| PLTR | **-18%** | AI 估值回调 | 破位 | 回避至企稳 |
+
+\*Mag7 周度为截至周三/周四中间口径与周五反弹混合；Mag7 集体为 2026 年最差一周（SPXGamma Edge）。
+
+### 6.2 系统性/指数权重异动
+
+| Ticker | 1W | 原因 | 板块含义 |
+|--------|-----|------|----------|
+| AAPL | -6%（周四） | 内存涨价传导 | 科技成本通胀 |
+| ACN/CTSH | -19% | AI 替代 consulting 担忧 | IT services 承压 |
+| ON | -26% | Cyclical semi 抛售 | 汽车/工业 semi 弱 |
+| MU | +16% | 财报 + HBM 叙事 | Memory 卖方市场 |
+
+---
+
+## 7. 风险与流动性 | Risk Dashboard
+
+| 指标 | 现值 | 1W Δ | 解读 |
+|------|------|------|------|
+| VIX / term structure | 18.41 / 近月偏高 | +1.6 | 中等恐慌；contango 正常 |
+| **HY OAS (FRED)** | **283bp** | **+17bp** | 走阔但未触发 25bp 警报 |
+| **10Y-2Y (FRED)** | **0.31%** | **+4bp** | 轻度 steepening |
+| IG OAS (FRED) | 77bp | +3bp | 同步走阔 |
+| Financial conditions | 中性偏紧 | — | 信用利差扩大 |
+| SPX–TLT corr | 负相关增强 | — | 股跌债涨模式 |
+
+**Triggered alerts**: HY OAS 1W +17bp — **监控**（未达 ±25bp 阈值）  
+**Watch levels next week**: SPX 7,339（50-DMA）、7,435（gamma flip）、7,350（put wall）；VIX 20；HY OAS 300bp
+
+---
+
+## 8. 市场 Regime | Regime Classification
+
+**Primary regime**: **Mega Rotation / AI-capex skepticism**（大类介于 Rotation 与 Risk-off-lite 之间）  
+**Confidence**: **M**  
+**Falsifiers**: SPX 重回 7,500+ 且 XLK 两周相对强于 XLV；或 HY OAS 突破 300bp + VIX > 22 持续
+
+**vs last week**: 首次确认 SPX 收盘跌破 50-DMA；Mag7 从「领涨」转「领跌」；广度指标逆势创新高 — rotation 从主题变为 **结构性再平衡**。
+
+---
+
+## 9. 异常与背离 | Anomalies
+
+| # | 观察 | 可能解释 | 交易含义 |
+|---|------|----------|----------|
+| 1 | SPX -2% 但 A/D line 历史新高 | Mag7 集中度 unwind | 勿用指数判断全面熊市 |
+| 2 | MU 财报 beat 但周五 memory 暴跌 | 获利了结 + Apple 成本担忧 | 波动交易；不追高位 |
+| 3 | Software (MSFT/IGV) 涨而 cyclical semi 跌 | 资金在 AI 链内部轮动 | Long software vs short semi 配对 |
+| 4 | HY OAS 走阔但 VIX < 20 | 信用对 AI 估值更敏感 | 关注 HY 作 early warning |
+| 5 | 中国港股 HSI -5% vs A股科创50 +6%（月内） | 离岸流动性 + 科技监管 | US+CN 科技分化 |
+
+---
+
+## 10. 下周策略 | Next-Week Playbook
+
+### Base case
+独立日短周（4 交易日），市场延续 **震荡 + 板块轮动**。SPX 在 7,300–7,450 区间整理，等待 7/2 NFP。若就业强 + 工资韧，Fed hawkish 交易或复燃；若数据偏弱，收益率下行支撑防御与 REITs。维持「指数谨慎、选股为主」。
+
+### Scenarios
+
+| 情景 | 概率 | 触发条件 | 资产表现 |
+|------|------|----------|----------|
+| Bull | 25% | NFP 温和 + SPX 收复 7,435 gamma flip | XLK/QQQ 反弹；HY 收窄 |
+| Base | 50% | 数据混合；SPX 7,300–7,450 震荡 | XLV/XLF 跑赢；Mag7 分化 |
+| Bear | 25% | NFP 强 + Warsh 鹰派 + SPX 破 7,200 | VIX > 22；HY OAS → 300bp；XLU/XLP |
+
+### Conviction setups (≤3)
+
+1. **Healthcare 相对做多** — Long XLV vs Short XLK · 触发：XLV RS 维持 · 失效：SPX < 7,200 · 1–2W
+2. **Memory 波动交易** — Long MU on pullback to 20-DMA · 触发：DRAM 合约价趋势 · 失效：SOX 周跌 > 5% · 1W
+3. **Gamma 区间交易** — Short vol above 7,450 / Long vol below 7,300 · 触发：negative GEX 持续 · 失效：VIX > 25 · 1W
+
+### Positioning
+- **Risk budget**: **hold**（不追加 beta；不减至极端防御）  
+- **Overweight**: XLV、XLF、RUT/IWM、IGV（software）  
+- **Underweight / avoid**: Mag7 集中敞口、cyclical semi（ON/TXN）、PLTR/ORCL  
+- **Thesis reset if**: SPX 两周收盘 > 7,500 且 HY OAS < 270bp
+
+---
+
+## 附录 | Appendix
+
+- **Sources**: FRED (`BAMLH0A0HYM2`, `T10Y2Y`, `DGS2`, `DGS10`, `BAMLC0A0CM`)；BEA PCE；BLS Claims；Morningstar sector data；Reuters/AP/Investopedia market wraps；TrendForce DRAM/HBM research；OpenAI/Anthropic/Google pricing pages；DevZero/Thunder Compute GPU pricing；LSEG Lipper flows；SPXGamma Edge；Four Dimension Trading breadth
+- **Disclaimer**: Research for informational purposes; not investment advice. Verify prices before trading.
+- **Changes vs prior report**: 首份自动化发布（memory 无历史对比）；后续 run 将追踪 HY OAS / GPU / API 周环比。
+"""
+
+META = {
+    "weekEnding": "2026-06-26",
+    "title": "Mag7 回调确认，防御轮动 + HY 走阔",
+    "regime": "Mega Rotation / AI-capex skepticism",
+    "regimeConfidence": "M",
+    "scope": "US+CN",
+    "generatedAt": "2026-06-30 14:40 CST",
+    "summaryOneLiner": "FROM XLK → TO XLV；HY OAS +17bp，SPX 跌破 50-DMA",
+    "kpis": [
+        {"label": "HY OAS", "value": "283bp", "delta": "+17bp", "dir": "up"},
+        {"label": "10Y-2Y", "value": "0.31%", "delta": "+4bp", "dir": "up"},
+        {"label": "VIX", "value": "18.41", "delta": "+1.6", "dir": "up"},
+    ],
+}
+
+
+def main() -> int:
+    payload = {"meta": META, "bodyMarkdown": BODY}
+    payload_path = "/workspace/payload.json"
+    with open(payload_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    token = os.environ.get("WEEKLY_REPORT_INGEST_TOKEN", "").strip()
+    api_url = os.environ.get("WEEKLY_REPORT_API_URL", "https://hblook.com").rstrip("/")
+    url = f"{api_url}/api/weekly-reports"
+
+    if not token:
+        print("POST status: FAIL — WEEKLY_REPORT_INGEST_TOKEN not set")
+        print(json.dumps(META, ensure_ascii=False, indent=2))
+        print(BODY)
+        return 1
+
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            status = resp.status
+            body = resp.read().decode("utf-8")
+            print(f"POST status: SUCCESS (HTTP {status})")
+            print(body)
+    except urllib.error.HTTPError as exc:
+        err_body = exc.read().decode("utf-8", errors="replace")
+        print(f"POST status: FAIL (HTTP {exc.code})")
+        print(err_body)
+        print(json.dumps(META, ensure_ascii=False, indent=2))
+        print(BODY)
+        return 1
+    except urllib.error.URLError as exc:
+        print(f"POST status: FAIL — {exc}")
+        print(json.dumps(META, ensure_ascii=False, indent=2))
+        print(BODY)
+        return 1
+
+    print(json.dumps(META, ensure_ascii=False, indent=2))
+    print(BODY)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
