@@ -103,7 +103,7 @@ Examples: Semiconductors vs Software; Banks vs Insurance; E&P vs Refiners; Homeb
 ### Tier 1 (always detail in report)
 
 - FOMC decision, CPI, Core PCE, NFP, GDP advance
-- Megacap earnings (AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA — adjust list)
+- Megacap earnings (AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA — adjust list) → **5.2** tables + expectation gap
 - Geopolitical shock with energy/trade channel
 - Credit event (bank stress, sovereign, large default)
 - **Market-moving speeches & headlines** — Fed/ECB/BOJ chair or key officials at major forums (ECB Forum Sintra, Jackson Hole); surprise tariff/sanction/fiscal headlines; systemic regulatory actions (see [macro-news-recall.md](macro-news-recall.md) → **2.1.2**)
@@ -112,14 +112,15 @@ Examples: Semiconductors vs Software; Banks vs Insurance; E&P vs Refiners; Homeb
 
 - Retail sales, ISM PMI, housing starts, jobless claims trend
 - ECB/BOJ/PBoC decisions
-- Sector-heavy earnings week
+- Sector-heavy earnings week → **5.2.1 / 5.2.2** (cluster summary + largest movers)
 - OPEX / index rebalance
 - **Scheduled Fed/ECB speaker slots** (non-chair) when same-day cross-asset move meets threshold → **2.1.2**
 - **Policy process news** (debt ceiling, budget vote, trade negotiation milestone) with FX/rates reaction
+- High-IV earnings with \|implied move\| elevated but not mega-cap → **5.2.2** preview row
 
 ### Tier 3 (calendar mention only)
 
-- Single mid-cap earnings
+- Single mid-cap earnings (unless \|1D\| ≥ 5% or sector-moving — then promote to **5.2**)
 - Minor regulatory filing
 - Low-impact international data
 - Routine Fed governor remarks with no measurable cross-asset move
@@ -139,6 +140,11 @@ Examples: Semiconductors vs Software; Banks vs Insurance; E&P vs Refiners; Homeb
 | DXY | \|1W\| > 1.5% | FX transmission paragraph |
 | HBM/API/GPU price | Official change or >5% WoW (reported) | Step 4.5 detail |
 | Hyperscaler capex guide | Any revision | Step 4.5 + event matrix |
+| Mega-cap / Mag7 earnings | Any print | Step **5.2.1** + **5.2.3** expectation gap |
+| Earnings vs consensus | Material EPS/rev/guide surprise or beat+selloff | Step **5.2.3** |
+| Next-week Tier-1 earnings | Mag7 / high IV / sector cluster | Step **5.2.2** preview |
+
+Full earnings inclusion rules: [earnings-recall.md](earnings-recall.md).
 
 ---
 
@@ -162,7 +168,8 @@ Examples: Semiconductors vs Software; Banks vs Insurance; E&P vs Refiners; Homeb
 4. Industry research — TrendForce/DRAMeXchange for HBM
 5. Central bank & statistical agency releases
 6. Major financial data terminals / aggregators (verify date)
-7. Company IR / SEC filings for capex & AI commentary
-8. Reputable financial press for narrative — cross-check numbers
+7. Company IR / SEC filings for capex, AI commentary, and **earnings/guidance** (Step 5.2)
+8. Earnings consensus aggregators — label source; never invent surprise %
+9. Reputable financial press for narrative — cross-check numbers
 
 If live data unavailable in automation run: state lag explicitly; do not guess.

@@ -40,6 +40,7 @@ Weekly Scan (Web) Progress:
 - [ ] 4. Sector & industry rotation
 - [ ] 4.5. AI supply chain (HBM, cloud GPU, API pricing, capex)
 - [ ] 5. Key events & catalyst map
+- [ ] 5.2. Earnings: reported + preview + expectation gaps
 - [ ] 6. Watchlist & systemic names
 - [ ] 7. Risk & liquidity dashboard
 - [ ] 8. Regime & cross-asset signals
@@ -90,17 +91,27 @@ Before writing 2.1: web-search the week's **speaker calendars + major headlines*
 
 **2.2 下周日历**: upcoming events with H/M/L impact.
 
+### Step 5.2 — Earnings, previews & expectation gaps (mandatory)
+
+Cover **this week's important prints**, **next week's earnings preview**, and **expectation gaps** (共识差 / 指引差 / 定价差). Full rules: [earnings-recall.md](reference/earnings-recall.md).
+
+Before writing §5.2: scan IR/earnings calendars + Mag7 / index heavyweights / >5% movers; pull EPS·revenue·guidance vs consensus from ≥2 sources; link same-day stock and sector reaction. Do **not** invent consensus or whisper numbers.
+
+**Silence**: if no Tier-1 print, keep §5.2 headers and write the explicit off-season note — do not omit the section.
+
 ### Steps 1–10 — Analysis content (continued)
 
 Same requirements as the core weekly scan. Reference:
 
 - Cross-asset & coverage: [coverage-matrix.md](reference/coverage-matrix.md)
 - AI supply chain Step 4.5: [ai-supply-chain.md](reference/ai-supply-chain.md)
+- Earnings Step 5.2: [earnings-recall.md](reference/earnings-recall.md)
 - Report structure: [weekly-report.md](templates/weekly-report.md)
 
 Key reminders:
 
 - **Step 4.5** AI tables required when AI/semi/tech is a driver (default: always include).
+- **Step 5.2** Earnings tables required: 本周已发布 + 下周预告 + 预期差 (or explicit silence notes).
 - **Step 8** Regime must include confidence (H/M/L) and falsifiers — feeds `meta.regime`.
 - **Step 10** Playbook must have invalidation levels.
 - Label 事实 / 解读 / 判断; every number needs as-of date.
@@ -113,9 +124,10 @@ Before delivery:
 - [ ] **2.1.2** filled with news/speeches OR explicit "no threshold event" note
 - [ ] **HY OAS + 10Y-2Y** from FRED (or proxy labeled) with 1W Δ in bp
 - [ ] **Step 4.5** AI tables filled or explicitly "no new print this week"
+- [ ] **Step 5.2** earnings: 本周已发布 + 下周预告 + 预期差 filled OR explicit silence notes
 - [ ] Every price/level has **as-of date** and source class
 - [ ] Facts vs opinions clearly labeled
-- [ ] No fabricated consensus numbers
+- [ ] No fabricated consensus / surprise / whisper numbers
 - [ ] Report fits [weekly-report.md](templates/weekly-report.md) structure
 - [ ] **meta** fields derived from report (not invented separately)
 - [ ] **No A-share / HK** index, ticker, or dedicated narrative sections (unless user explicitly overrides scope)
@@ -174,7 +186,8 @@ When the user wants a **scheduled weekly Cursor Automation**, read the **automat
 - Agent **must** pull HY OAS + 10Y-2Y via FRED before credit/curve fields
 - Agent **must** run Step 4.5 AI supply chain tracker
 - Agent **must** research **2.1.2** news/speeches (forums, Fed/ECB remarks, policy headlines) per [macro-news-recall.md](reference/macro-news-recall.md)
-- Agent **must not** invent data
+- Agent **must** research **5.2** important earnings, next-week previews, and expectation gaps per [earnings-recall.md](reference/earnings-recall.md)
+- Agent **must not** invent data (including consensus / surprise %)
 - Agent **must not** post to Slack, WeChat, or other channels
 - Output: `meta` + `bodyMarkdown` in run output **and** POST to site
 
@@ -209,5 +222,6 @@ When the user wants a **scheduled weekly Cursor Automation**, read the **automat
 - FRED fetch script: [scripts/fetch_fred.py](scripts/fetch_fred.py)
 - Coverage & thresholds: [coverage-matrix.md](reference/coverage-matrix.md)
 - Macro news & speeches (2.1.2): [macro-news-recall.md](reference/macro-news-recall.md)
+- Earnings & expectation gaps (5.2): [earnings-recall.md](reference/earnings-recall.md)
 - Automation prompt: [automation-prompt.md](templates/automation-prompt.md)
 - Report template: [weekly-report.md](templates/weekly-report.md)

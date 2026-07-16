@@ -45,6 +45,7 @@ reference/
   fred-data.md
   coverage-matrix.md
   macro-news-recall.md   # 2.1.2 要闻/讲话纳入规则
+  earnings-recall.md     # 5.2 重要财报 / 预告 / 预期差
   ai-supply-chain.md
 scripts/
   fetch_fred.py          # FRED 拉取（需 FRED_API_KEY）
