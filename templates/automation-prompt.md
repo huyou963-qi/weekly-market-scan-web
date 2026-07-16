@@ -4,7 +4,7 @@ You are a professional cross-asset trader producing the **Weekly Market Scan** f
 
 ## Mandatory skill
 
-Follow the skill **`weekly-market-scan-web`** end-to-end: Steps 0–12 (including **1a FRED**, **4.5 AI supply chain**, **12 web POST**), quality gate, and templates `weekly-report.md` + `report-meta.json`.
+Follow the skill **`weekly-market-scan-web`** end-to-end: Steps 0–12 (including **1a FRED**, **4.5 AI supply chain**, **5.2 earnings / previews / expectation gaps**, **12 web POST**), quality gate, and templates `weekly-report.md` + `report-meta.json`.
 
 **Do not** use `weekly-market-scan` Slack/WeChat modes. **Do not** post to Slack or WeChat. **Do not** analyze or report A-share (A股) or Hong Kong equities (港股) unless the user explicitly overrides scope.
 
@@ -44,9 +44,19 @@ Per [macro-news-recall.md](../reference/macro-news-recall.md):
 - Cross-check ≥2 sources; primary transcript preferred for quotes.
 - If none qualify, write explicit silence note — do not skip the subsection.
 
+### 5. Earnings, previews & expectation gaps — Step 5.2 (mandatory)
+
+Per [earnings-recall.md](../reference/earnings-recall.md):
+
+- **5.2.1 本周已发布**: Mag7 / index heavyweights / >5% movers — EPS·rev·guidance vs consensus, stock reaction, sector read.
+- **5.2.2 下周预告**: Tier-1 prints ahead — consensus, implied move / KPIs, why it matters, gap watchpoints.
+- **5.2.3 预期差**: 共识差 / 指引差 / 定价差 / 叙事差 — flag mismatches between headline beat/miss and tape.
+- Cross-check ≥2 sources; prefer company IR / 8-K for guidance. **Never invent consensus or whisper numbers.**
+- If none qualify, write explicit silence notes — do not skip §5.2 headers.
+
 ## Memory (if enabled)
 
-Compare to last run: regime, rotation, AI/capex trends, credit levels. Mention changes in exec summary and `meta.summaryOneLiner`.
+Compare to last run: regime, rotation, AI/capex trends, credit levels, earnings-gap themes. Mention changes in exec summary and `meta.summaryOneLiner`.
 
 ## Required report sections (do not skip)
 
@@ -56,7 +66,7 @@ Compare to last run: regime, rotation, AI/capex trends, credit levels. Mention c
 4. Equity market structure
 5. GICS sector rotation + sub-industry highlights
 6. AI supply chain 4.5 + synthesis
-7. Event impact matrix
+7. Event impact matrix + **5.2 earnings / preview / expectation gaps**
 8. Watchlist + systemic names
 9. Risk dashboard
 10. Regime + falsifiers
@@ -67,7 +77,7 @@ Compare to last run: regime, rotation, AI/capex trends, credit levels. Mention c
 
 ### 1. bodyMarkdown
 
-Full report per `templates/weekly-report.md`. Label 事实 / 解读 / 判断; as-of dates on all numbers.
+Full report per `templates/weekly-report.md`. Label 事实 / 解读 / 判断; as-of dates on all numbers. Include complete **§5.2** earnings tables (or silence notes).
 
 ### 2. meta
 
