@@ -1,0 +1,14 @@
+{
+  "weekEnding": "2026-07-17",
+  "title": "AI芯片回撤，油价地缘重定价",
+  "regime": "AI Derating / Stagflation-lite Overlay",
+  "regimeConfidence": "M",
+  "scope": "Global",
+  "generatedAt": "2026-07-18 08:15 CST",
+  "summaryOneLiner": "FROM XLK/SOXX → TO XLE/防御；WTI +15%，VIX 升至 18.8，关注 GOOGL/TSLA 与 FOMC",
+  "kpis": [
+    { "label": "HY OAS", "value": "271bp", "delta": "+2bp", "dir": "up" },
+    { "label": "10Y-2Y", "value": "0.37%", "delta": "+2bp", "dir": "up" },
+    { "label": "VIX", "value": "18.77", "delta": "+3.74", "dir": "up" }
+  ]
+}
