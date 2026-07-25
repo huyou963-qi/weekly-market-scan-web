@@ -1,0 +1,14 @@
+{
+  "weekEnding": "2026-07-24",
+  "title": "油价再冲高，AI Capex 消化拖累 Mag7",
+  "regime": "Stagflation-lite / AI Capex Digestion",
+  "regimeConfidence": "M",
+  "scope": "Global",
+  "generatedAt": "2026-07-25 08:15 CST",
+  "summaryOneLiner": "FROM Mega-cap growth → TO XLE/XLU；WTI≈90 与 FOMC 沟通风险主导",
+  "kpis": [
+    { "label": "HY OAS", "value": "277bp", "delta": "+6bp", "dir": "up" },
+    { "label": "10Y-2Y", "value": "0.36%", "delta": "-1bp", "dir": "down" },
+    { "label": "VIX", "value": "18.58", "delta": "-0.19", "dir": "down" }
+  ]
+}
