@@ -1,0 +1,116 @@
+[
+  {
+    "weekEnding": "2026-05-08",
+    "status": 200,
+    "ok": true,
+    "resp": "{\"id\":\"6ddc851c-74c3-4f64-a5c8-c0d4d030a102\",\"weekEnding\":\"2026-05-08\",\"report\":{\"id\":\"6ddc851c-74c3-4f64-a5c8-c0d4d030a102\",\"weekEnding\":\"2026-05-08\",\"meta\":{\"weekEnding\":\"2026-05-08\",\"title\":\"美股周涨2.3%，AI-driven risk-on\",\"regime\":\"AI-drive"
+  },
+  {
+    "weekEnding": "2026-05-01",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"38a39977-3bc3-4db2-b985-dd8638f7e83a\",\"weekEnding\":\"2026-05-01\",\"report\":{\"id\":\"38a39977-3bc3-4db2-b985-dd8638f7e83a\",\"weekEnding\":\"2026-05-01\",\"meta\":{\"weekEnding\":\"2026-05-01\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Mixed / Transitional"
+  },
+  {
+    "weekEnding": "2026-04-24",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"24f95052-b819-4070-85c2-cde117b2cc0b\",\"weekEnding\":\"2026-04-24\",\"report\":{\"id\":\"24f95052-b819-4070-85c2-cde117b2cc0b\",\"weekEnding\":\"2026-04-24\",\"meta\":{\"weekEnding\":\"2026-04-24\",\"title\":\"半导体周变动+10.0%，风格主导\",\"regime\":\"AI-driven risk-on"
+  },
+  {
+    "weekEnding": "2026-04-17",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"31e3ebdc-c967-416c-8f4c-5ff79b41b758\",\"weekEnding\":\"2026-04-17\",\"report\":{\"id\":\"31e3ebdc-c967-416c-8f4c-5ff79b41b758\",\"weekEnding\":\"2026-04-17\",\"meta\":{\"weekEnding\":\"2026-04-17\",\"title\":\"美股周涨4.5%，AI-driven risk-on\",\"regime\":\"AI-drive"
+  },
+  {
+    "weekEnding": "2026-04-10",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"6665caf6-2481-4bea-9925-8ce7933e9842\",\"weekEnding\":\"2026-04-10\",\"report\":{\"id\":\"6665caf6-2481-4bea-9925-8ce7933e9842\",\"weekEnding\":\"2026-04-10\",\"meta\":{\"weekEnding\":\"2026-04-10\",\"title\":\"美股周涨3.6%，Risk-on\",\"regime\":\"Risk-on / Goldiloc"
+  },
+  {
+    "weekEnding": "2026-04-02",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"b5d05f10-f03c-41c4-bb1a-e05a5342e6e1\",\"weekEnding\":\"2026-04-02\",\"report\":{\"id\":\"b5d05f10-f03c-41c4-bb1a-e05a5342e6e1\",\"weekEnding\":\"2026-04-02\",\"meta\":{\"weekEnding\":\"2026-04-02\",\"title\":\"美股周涨3.4%，Risk-on\",\"regime\":\"Risk-on / Goldiloc"
+  },
+  {
+    "weekEnding": "2026-03-27",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"73332e28-9c5c-4aa2-ba2b-b4e8c909e8d4\",\"weekEnding\":\"2026-03-27\",\"report\":{\"id\":\"73332e28-9c5c-4aa2-ba2b-b4e8c909e8d4\",\"weekEnding\":\"2026-03-27\",\"meta\":{\"weekEnding\":\"2026-03-27\",\"title\":\"美股周跌2.1%，波动回升\",\"regime\":\"Risk-off / Volatility"
+  },
+  {
+    "weekEnding": "2026-03-20",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"68bc1a71-7ca2-4c9b-b06c-2717c2dbfe91\",\"weekEnding\":\"2026-03-20\",\"report\":{\"id\":\"68bc1a71-7ca2-4c9b-b06c-2717c2dbfe91\",\"weekEnding\":\"2026-03-20\",\"meta\":{\"weekEnding\":\"2026-03-20\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Risk-off / Volatilit"
+  },
+  {
+    "weekEnding": "2026-03-13",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"a01bac72-ade5-4b9b-bd08-418b06ed2354\",\"weekEnding\":\"2026-03-13\",\"report\":{\"id\":\"a01bac72-ade5-4b9b-bd08-418b06ed2354\",\"weekEnding\":\"2026-03-13\",\"meta\":{\"weekEnding\":\"2026-03-13\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Risk-off / Volatilit"
+  },
+  {
+    "weekEnding": "2026-03-06",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"80c57a80-2156-41eb-9660-dc9e4d03bbb1\",\"weekEnding\":\"2026-03-06\",\"report\":{\"id\":\"80c57a80-2156-41eb-9660-dc9e4d03bbb1\",\"weekEnding\":\"2026-03-06\",\"meta\":{\"weekEnding\":\"2026-03-06\",\"title\":\"美股周跌2.0%，波动回升\",\"regime\":\"Risk-off / Volatility"
+  },
+  {
+    "weekEnding": "2026-02-27",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"3a8954c4-9aaa-4752-bf92-87e44f81f494\",\"weekEnding\":\"2026-02-27\",\"report\":{\"id\":\"3a8954c4-9aaa-4752-bf92-87e44f81f494\",\"weekEnding\":\"2026-02-27\",\"meta\":{\"weekEnding\":\"2026-02-27\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Range / Digestion\",\""
+  },
+  {
+    "weekEnding": "2026-02-20",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"9206f566-9291-432c-87b7-a0e591770e47\",\"weekEnding\":\"2026-02-20\",\"report\":{\"id\":\"9206f566-9291-432c-87b7-a0e591770e47\",\"weekEnding\":\"2026-02-20\",\"meta\":{\"weekEnding\":\"2026-02-20\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Mixed / Transitional"
+  },
+  {
+    "weekEnding": "2026-02-13",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"982f8dad-b2ec-4941-93af-6a7a794c54d9\",\"weekEnding\":\"2026-02-13\",\"report\":{\"id\":\"982f8dad-b2ec-4941-93af-6a7a794c54d9\",\"weekEnding\":\"2026-02-13\",\"meta\":{\"weekEnding\":\"2026-02-13\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Mixed / Transitional"
+  },
+  {
+    "weekEnding": "2026-02-06",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"c789211b-6272-4295-9561-7e05ad4b4aa2\",\"weekEnding\":\"2026-02-06\",\"report\":{\"id\":\"c789211b-6272-4295-9561-7e05ad4b4aa2\",\"weekEnding\":\"2026-02-06\",\"meta\":{\"weekEnding\":\"2026-02-06\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Range / Digestion\",\""
+  },
+  {
+    "weekEnding": "2026-01-30",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"174dfe1e-a375-4a70-8946-6bfa776108d2\",\"weekEnding\":\"2026-01-30\",\"report\":{\"id\":\"174dfe1e-a375-4a70-8946-6bfa776108d2\",\"weekEnding\":\"2026-01-30\",\"meta\":{\"weekEnding\":\"2026-01-30\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Range / Digestion\",\""
+  },
+  {
+    "weekEnding": "2026-01-23",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"a46678c3-d6f7-4cfa-8aca-268456ec5443\",\"weekEnding\":\"2026-01-23\",\"report\":{\"id\":\"a46678c3-d6f7-4cfa-8aca-268456ec5443\",\"weekEnding\":\"2026-01-23\",\"meta\":{\"weekEnding\":\"2026-01-23\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Range / Digestion\",\""
+  },
+  {
+    "weekEnding": "2026-01-16",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"65ea4518-0edc-41a7-98db-e49b3f30e185\",\"weekEnding\":\"2026-01-16\",\"report\":{\"id\":\"65ea4518-0edc-41a7-98db-e49b3f30e185\",\"weekEnding\":\"2026-01-16\",\"meta\":{\"weekEnding\":\"2026-01-16\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Range / Digestion\",\""
+  },
+  {
+    "weekEnding": "2026-01-09",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"36a52ee9-3fc4-4341-a1f8-554c170acb56\",\"weekEnding\":\"2026-01-09\",\"report\":{\"id\":\"36a52ee9-3fc4-4341-a1f8-554c170acb56\",\"weekEnding\":\"2026-01-09\",\"meta\":{\"weekEnding\":\"2026-01-09\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Risk-on / Goldilocks"
+  },
+  {
+    "weekEnding": "2026-01-02",
+    "status": 201,
+    "ok": true,
+    "resp": "{\"id\":\"2a826203-e873-4673-89bd-ef170efa33e4\",\"weekEnding\":\"2026-01-02\",\"report\":{\"id\":\"2a826203-e873-4673-89bd-ef170efa33e4\",\"weekEnding\":\"2026-01-02\",\"meta\":{\"weekEnding\":\"2026-01-02\",\"title\":\"跨资产震荡消化，关注数据窗口\",\"regime\":\"Mixed / Transitional"
+  }
+]

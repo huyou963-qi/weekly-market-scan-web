@@ -1,0 +1,348 @@
+{
+  "calendarFriday": "2026-03-06",
+  "weekEnding": "2026-03-06",
+  "weekStart": "2026-03-02",
+  "priorWeekEnding": "2026-02-27",
+  "fred": {
+    "hy_oas": {
+      "series_id": "BAMLH0A0HYM2",
+      "as_of": "2026-03-06",
+      "value": 3.13,
+      "change_1w": 0.03,
+      "change_1w_bps": 3.0,
+      "change_1m_bps": 27.0,
+      "prior_date": "2026-02-27"
+    },
+    "curve_10y2y": {
+      "series_id": "T10Y2Y",
+      "as_of": "2026-03-06",
+      "value": 0.59,
+      "change_1w": 0.0,
+      "change_1w_bps": 0.0,
+      "change_1m_bps": -13.0,
+      "prior_date": "2026-02-27"
+    },
+    "ust_2y": {
+      "series_id": "DGS2",
+      "as_of": "2026-03-06",
+      "value": 3.56,
+      "change_1w": 0.18,
+      "change_1w_bps": 18.0,
+      "change_1m_bps": -1.0,
+      "prior_date": "2026-02-27"
+    },
+    "ust_10y": {
+      "series_id": "DGS10",
+      "as_of": "2026-03-06",
+      "value": 4.15,
+      "change_1w": 0.18,
+      "change_1w_bps": 18.0,
+      "change_1m_bps": -14.0,
+      "prior_date": "2026-02-27"
+    },
+    "ig_oas": {
+      "series_id": "BAMLC0A0CM",
+      "as_of": "2026-03-06",
+      "value": 0.84,
+      "change_1w": -0.01,
+      "change_1w_bps": -1.0,
+      "change_1m_bps": 9.0,
+      "prior_date": "2026-02-27"
+    }
+  },
+  "markets": {
+    "SPX": {
+      "as_of": "2026-03-06",
+      "close": 6740.02,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 6878.88,
+      "chg_1w_pct": -2.02,
+      "ytd_pct": -1.73
+    },
+    "NDX": {
+      "as_of": "2026-03-06",
+      "close": 24643.02,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 24960.04,
+      "chg_1w_pct": -1.27,
+      "ytd_pct": -2.23
+    },
+    "RUT": {
+      "as_of": "2026-03-06",
+      "close": 2525.3,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 2632.36,
+      "chg_1w_pct": -4.07,
+      "ytd_pct": 0.68
+    },
+    "VIX": {
+      "as_of": "2026-03-06",
+      "close": 29.49,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 19.86,
+      "chg_1w_pct": 48.49,
+      "ytd_pct": 103.24
+    },
+    "DXY": {
+      "as_of": "2026-03-06",
+      "close": 98.99,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 97.61,
+      "chg_1w_pct": 1.41,
+      "ytd_pct": 0.58
+    },
+    "WTI": {
+      "as_of": "2026-03-06",
+      "close": 90.9,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 67.02,
+      "chg_1w_pct": 35.63,
+      "ytd_pct": 58.58
+    },
+    "GOLD": {
+      "as_of": "2026-03-06",
+      "close": 5146.1,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 5230.5,
+      "chg_1w_pct": -1.61,
+      "ytd_pct": 19.28
+    },
+    "COPPER": {
+      "as_of": "2026-03-06",
+      "close": 5.76,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 6.0,
+      "chg_1w_pct": -4.12,
+      "ytd_pct": 2.07
+    },
+    "XLK": {
+      "as_of": "2026-03-06",
+      "close": 137.29,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 138.76,
+      "chg_1w_pct": -1.06,
+      "ytd_pct": -4.86
+    },
+    "XLF": {
+      "as_of": "2026-03-06",
+      "close": 50.57,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 51.43,
+      "chg_1w_pct": -1.67,
+      "ytd_pct": -7.94
+    },
+    "XLV": {
+      "as_of": "2026-03-06",
+      "close": 152.7,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 160.2,
+      "chg_1w_pct": -4.68,
+      "ytd_pct": -1.81
+    },
+    "XLE": {
+      "as_of": "2026-03-06",
+      "close": 56.57,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 55.92,
+      "chg_1w_pct": 1.16,
+      "ytd_pct": 23.92
+    },
+    "XLI": {
+      "as_of": "2026-03-06",
+      "close": 169.94,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 177.14,
+      "chg_1w_pct": -4.06,
+      "ytd_pct": 7.57
+    },
+    "XLP": {
+      "as_of": "2026-03-06",
+      "close": 85.78,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 90.01,
+      "chg_1w_pct": -4.7,
+      "ytd_pct": 10.41
+    },
+    "XLY": {
+      "as_of": "2026-03-06",
+      "close": 114.44,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 116.86,
+      "chg_1w_pct": -2.07,
+      "ytd_pct": -3.3
+    },
+    "XLU": {
+      "as_of": "2026-03-06",
+      "close": 46.74,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 47.73,
+      "chg_1w_pct": -2.07,
+      "ytd_pct": 8.24
+    },
+    "XLRE": {
+      "as_of": "2026-03-06",
+      "close": 42.89,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 43.84,
+      "chg_1w_pct": -2.17,
+      "ytd_pct": 6.22
+    },
+    "XLB": {
+      "as_of": "2026-03-06",
+      "close": 49.86,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 53.41,
+      "chg_1w_pct": -6.65,
+      "ytd_pct": 8.11
+    },
+    "XLC": {
+      "as_of": "2026-03-06",
+      "close": 117.46,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 118.05,
+      "chg_1w_pct": -0.5,
+      "ytd_pct": 0.48
+    },
+    "SPY": {
+      "as_of": "2026-03-06",
+      "close": 672.38,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 685.99,
+      "chg_1w_pct": -1.98,
+      "ytd_pct": -1.58
+    },
+    "QQQ": {
+      "as_of": "2026-03-06",
+      "close": 599.75,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 607.29,
+      "chg_1w_pct": -1.24,
+      "ytd_pct": -2.18
+    },
+    "IWM": {
+      "as_of": "2026-03-06",
+      "close": 250.89,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 261.41,
+      "chg_1w_pct": -4.02,
+      "ytd_pct": 0.85
+    },
+    "TLT": {
+      "as_of": "2026-03-06",
+      "close": 88.46,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 90.82,
+      "chg_1w_pct": -2.6,
+      "ytd_pct": 1.64
+    },
+    "HYG": {
+      "as_of": "2026-03-06",
+      "close": 79.69,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 80.72,
+      "chg_1w_pct": -1.28,
+      "ytd_pct": -1.21
+    },
+    "LQD": {
+      "as_of": "2026-03-06",
+      "close": 110.16,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 111.68,
+      "chg_1w_pct": -1.36,
+      "ytd_pct": 0.0
+    },
+    "NVDA": {
+      "as_of": "2026-03-06",
+      "close": 177.82,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 177.19,
+      "chg_1w_pct": 0.36,
+      "ytd_pct": -5.84
+    },
+    "MSFT": {
+      "as_of": "2026-03-06",
+      "close": 408.96,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 392.74,
+      "chg_1w_pct": 4.13,
+      "ytd_pct": -13.53
+    },
+    "AAPL": {
+      "as_of": "2026-03-06",
+      "close": 257.46,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 264.18,
+      "chg_1w_pct": -2.54,
+      "ytd_pct": -5.0
+    },
+    "GOOGL": {
+      "as_of": "2026-03-06",
+      "close": 298.52,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 311.76,
+      "chg_1w_pct": -4.25,
+      "ytd_pct": -5.28
+    },
+    "AMZN": {
+      "as_of": "2026-03-06",
+      "close": 213.21,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 210.0,
+      "chg_1w_pct": 1.53,
+      "ytd_pct": -5.87
+    },
+    "META": {
+      "as_of": "2026-03-06",
+      "close": 644.86,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 648.18,
+      "chg_1w_pct": -0.51,
+      "ytd_pct": -0.85
+    },
+    "MU": {
+      "as_of": "2026-03-06",
+      "close": 370.3,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 412.37,
+      "chg_1w_pct": -10.2,
+      "ytd_pct": 17.4
+    },
+    "SOX": {
+      "as_of": "2026-03-06",
+      "close": 7514.74,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 8098.37,
+      "chg_1w_pct": -7.21,
+      "ytd_pct": 2.0
+    },
+    "AMD": {
+      "as_of": "2026-03-06",
+      "close": 192.43,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 200.21,
+      "chg_1w_pct": -3.89,
+      "ytd_pct": -13.89
+    },
+    "TSLA": {
+      "as_of": "2026-03-06",
+      "close": 396.73,
+      "prior_week_date": "2026-02-27",
+      "prior_week_close": 402.51,
+      "chg_1w_pct": -1.44,
+      "ytd_pct": -9.44
+    }
+  },
+  "sector_rel_spx": {
+    "XLK": 0.96,
+    "XLF": 0.35,
+    "XLV": -2.66,
+    "XLE": 3.18,
+    "XLI": -2.04,
+    "XLP": -2.68,
+    "XLY": -0.05,
+    "XLU": -0.05,
+    "XLRE": -0.15,
+    "XLB": -4.63,
+    "XLC": 1.52
+  }
+}

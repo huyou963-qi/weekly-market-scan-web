@@ -1,0 +1,116 @@
+[
+  {
+    "weekEnding": "2026-01-02",
+    "title": "新年缩量消化 Santa 落空，能源公用相对抗跌",
+    "regime": "New-Year Digestion / Failed Santa",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-01-09",
+    "title": "非农偏软创指新高，消费材料领涨广度改善",
+    "regime": "Broad Soft-Landing Risk-On",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-01-16",
+    "title": "CPI 粘性确认，银行承压半导体重估",
+    "regime": "Sticky-Inflation Digestion / Earnings Season Open",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-01-23",
+    "title": "短周关税扰动，黄金逼近五千美元",
+    "regime": "Geopolitical Jitters + Hard-Asset Bid",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-01-30",
+    "title": "FOMC 按兵不动，META/MSFT 撕裂 AI 定价",
+    "regime": "Post-FOMC Mag7 Bifurcation",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-02-06",
+    "title": "AI 开支恐慌撕裂成长，非农延期至下周",
+    "regime": "AI Capex Digest / Growth Fracture",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-02-13",
+    "title": "CPI降温难救科技：AAPL重挫8%，公用暴涨7%领防御轮动",
+    "regime": "Bond Rally / Tech Idiosyncratic Risk-Off",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-02-20",
+    "title": "总统日短周反弹：关税裁决提振风险偏好，Nasdaq终结五周连跌",
+    "regime": "Short-Week Relief Rally / Policy Risk Easing",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-02-27",
+    "title": "NVDA好消息卖出，热PPI引爆防御轮动，信用逼近警报",
+    "regime": "AI Hangover / Defensive Rotation",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-03-06",
+    "title": "滞胀冲击：油价周涨36%，非农-92k，VIX逼近30",
+    "regime": "Stagflation Shock / Geopolitical Risk-Off",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-03-13",
+    "title": "CPI 符合预期但油价主导，存储独强金融承压",
+    "regime": "Oil-Shock Digestion / Pre-FOMC Caution",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-03-20",
+    "title": "FOMC 暂停金价暴跌，能源成唯一避风港",
+    "regime": "Hawkish Pause / Policy Uncertainty",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-03-27",
+    "title": "科技溃败能源称王，VIX 重返 30",
+    "regime": "War Rotation / Stagflation Fear",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-04-02",
+    "title": "短周首涨消化油价冲击，科技反弹信用收窄",
+    "regime": "Geopolitical Risk-On Rebound",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-04-10",
+    "title": "美伊停火油价崩盘，风险资产暴力修复",
+    "regime": "Geopolitical Relief Rally",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-04-17",
+    "title": "停火延伸推升SPX新高，油价周跌13%",
+    "regime": "Geopolitical Relief Risk-on",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-04-24",
+    "title": "Intel引爆SOX新高，油价周涨13%待FOMC",
+    "regime": "Semiconductor Momentum Risk-on",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-05-01",
+    "title": "Mag7按ROI分化，FOMC分裂，油价重返百元",
+    "regime": "AI Capex Dispersion / Selective Risk-on",
+    "status": "posted"
+  },
+  {
+    "weekEnding": "2026-05-08",
+    "title": "半导体领涨创新高，非农强劲但 CPI 待验",
+    "regime": "AI-driven Goldilocks",
+    "status": "posted"
+  }
+]
