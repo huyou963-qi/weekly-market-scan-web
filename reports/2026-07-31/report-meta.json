@@ -1,0 +1,14 @@
+{
+  "weekEnding": "2026-07-31",
+  "title": "云财报兑现分层，FOMC 鹰派按兵不动",
+  "regime": "AI Monetization Bifurcation / Hawkish-Hold Overlay",
+  "regimeConfidence": "M",
+  "scope": "Global",
+  "generatedAt": "2026-08-01 08:30 CST",
+  "summaryOneLiner": "FROM XLU/SOXX → TO XLY；油价尾部与 HY OAS 微阔仍是关键风险",
+  "kpis": [
+    { "label": "HY OAS", "value": "284bp", "delta": "+7bp", "dir": "up" },
+    { "label": "10Y-2Y", "value": "0.47%", "delta": "+11bp", "dir": "up" },
+    { "label": "VIX", "value": "15.99", "delta": "-2.59", "dir": "down" }
+  ]
+}
