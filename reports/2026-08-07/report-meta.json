@@ -1,0 +1,14 @@
+{
+  "weekEnding": "2026-08-07",
+  "title": "软就业与油价回落推升风险偏好，半导体领涨",
+  "regime": "Soft-landing / Risk-on (AI leadership)",
+  "regimeConfidence": "M",
+  "scope": "Global",
+  "generatedAt": "2026-08-08 08:03 CST",
+  "summaryOneLiner": "FROM XLE/XLU → TO XLK/SOXX；关键风险为 08-12 CPI 与 Hormuz 预期落空",
+  "kpis": [
+    { "label": "HY OAS", "value": "271bp", "delta": "-13bp", "dir": "down" },
+    { "label": "10Y-2Y", "value": "0.46%", "delta": "-1bp", "dir": "down" },
+    { "label": "VIX", "value": "14.90", "delta": "-1.09", "dir": "down" }
+  ]
+}
