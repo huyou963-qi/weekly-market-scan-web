@@ -47,8 +47,10 @@ reference/
   macro-news-recall.md   # 2.1.2 要闻/讲话纳入规则
   earnings-recall.md     # 5.2 重要财报 / 预告 / 预期差
   ai-supply-chain.md
+  equity-structure.md    # 3. 股市结构：A/D、NH/NL、DMA 占比
 scripts/
   fetch_fred.py          # FRED 拉取（需 FRED_API_KEY）
+  fetch_breadth.py       # S&P 500 广度（A/D、NH/NL、>50/200DMA）
 ```
 
 ## 相关仓库

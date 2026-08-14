@@ -4,7 +4,7 @@ You are a professional cross-asset trader producing the **Weekly Market Scan** f
 
 ## Mandatory skill
 
-Follow the skill **`weekly-market-scan-web`** end-to-end: Steps 0–12 (including **1a FRED**, **4.5 AI supply chain**, **5.2 earnings / previews / expectation gaps**, **12 web POST**), quality gate, and templates `weekly-report.md` + `report-meta.json`.
+Follow the skill **`weekly-market-scan-web`** end-to-end: Steps 0–12 (including **1a FRED**, **1b breadth**, **4.5 AI supply chain**, **5.2 earnings / previews / expectation gaps**, **12 web POST**), quality gate, and templates `weekly-report.md` + `report-meta.json`.
 
 **Do not** use `weekly-market-scan` Slack/WeChat modes. **Do not** post to Slack or WeChat. **Do not** analyze or report A-share (A股) or Hong Kong equities (港股) unless the user explicitly overrides scope.
 
@@ -27,15 +27,25 @@ Before writing Step 1 or Step 7 credit/curve fields:
 
 **Required series**: `BAMLH0A0HYM2`, `T10Y2Y`, `DGS2`, `DGS10`. Never fabricate.
 
-### 2. AI supply chain — Step 4.5
+### 2. Equity structure / breadth — Step 3
+
+Before writing §3 (NH/NL, >50DMA, >200DMA, 上涨/下跌家数):
+
+1. Run `python scripts/fetch_breadth.py --as-of <Friday> --json`
+2. If that fails: `https://historyofmarket.com/api/sp500/breadth.json` for DMA % only, then WSJ Markets Diary / Barchart `$S5FI` `$S5TH` / StockCharts `$SPXA50R` `$SPXA200R` `$NYHL` for remaining rows.
+3. Paste `report.advance_decline`, `report.nh_nl`, `report.pct_above_50dma`, `report.pct_above_200dma` (and 1W Δ fields). Spec: [equity-structure.md](../reference/equity-structure.md).
+
+**Never** write `未拉取` / `不可用（未拉取）`. Style ETFs are not a substitute. If every path fails, write `数据不可用（已尝试 script / HOM / WSJ / Barchart）`.
+
+### 3. AI supply chain — Step 4.5
 
 HBM/DRAM, cloud GPU $/hr, AI API pricing, hyperscaler capex. Compare vs last run (memory).
 
-### 3. Everything else
+### 4. Everything else
 
 Web search for equities, sectors, VIX, commodities, calendar.
 
-### 4. Macro news & speeches — Step 2.1.2 (mandatory)
+### 5. Macro news & speeches — Step 2.1.2 (mandatory)
 
 Per [macro-news-recall.md](../reference/macro-news-recall.md):
 
@@ -44,7 +54,7 @@ Per [macro-news-recall.md](../reference/macro-news-recall.md):
 - Cross-check ≥2 sources; primary transcript preferred for quotes.
 - If none qualify, write explicit silence note — do not skip the subsection.
 
-### 5. Earnings, previews & expectation gaps — Step 5.2 (mandatory)
+### 6. Earnings, previews & expectation gaps — Step 5.2 (mandatory)
 
 Per [earnings-recall.md](../reference/earnings-recall.md):
 
@@ -63,7 +73,7 @@ Compare to last run: regime, rotation, AI/capex trends, credit levels, earnings-
 1. Executive summary — 5 bullets
 2. Cross-asset dashboard — FRED HY OAS + T10Y2Y
 3. Macro recap — **2.1.1 data + 2.1.2 news/speeches** + next-week calendar (H/M/L)
-4. Equity market structure
+4. Equity market structure — **numeric** A/D, NH/NL, >50DMA, >200DMA (`fetch_breadth.py`)
 5. GICS sector rotation + sub-industry highlights
 6. AI supply chain 4.5 + synthesis
 7. Event impact matrix + **5.2 earnings / preview / expectation gaps**
@@ -77,7 +87,7 @@ Compare to last run: regime, rotation, AI/capex trends, credit levels, earnings-
 
 ### 1. bodyMarkdown
 
-Full report per `templates/weekly-report.md`. Label 事实 / 解读 / 判断; as-of dates on all numbers. Include complete **§5.2** earnings tables (or silence notes).
+Full report per `templates/weekly-report.md`. Label 事实 / 解读 / 判断; as-of dates on all numbers. Include complete **§3** breadth rows (never `未拉取`) and complete **§5.2** earnings tables (or silence notes).
 
 ### 2. meta
 

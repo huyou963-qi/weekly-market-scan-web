@@ -77,6 +77,8 @@ Cover **scheduled data** and **market-moving news** (speeches, policy headlines,
 | >200DMA 占比 | | | |
 | 指数涨幅中 Top10 贡献 | | | |
 
+Universe: **S&P 500 constituents**. Fill from `scripts/fetch_breadth.py --as-of <Friday> --json` (spec: [equity-structure.md](../reference/equity-structure.md)). Do **not** write 未拉取.
+
 **Style / factor**: Growth vs Value · Large vs Small · [what worked]
 
 **Flow / positioning** (if available): [ETF flows, short interest]

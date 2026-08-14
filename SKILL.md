@@ -33,6 +33,7 @@ Copy and track progress:
 Weekly Scan (Web) Progress:
 - [ ] 0. Scope & period anchor
 - [ ] 1a. FRED pull (HY OAS + 10Y-2Y) — MCP or scripts/fetch_fred.py
+- [ ] 1b. Breadth pull (A/D, NH/NL, % >50/200 DMA) — scripts/fetch_breadth.py
 - [ ] 1. Cross-asset dashboard
 - [ ] 2. Macro & policy recap
 - [ ] 2b. Macro news & speeches recall (2.1.2)
@@ -74,6 +75,21 @@ Fetch **before** filling credit/curve fields. Full spec: [fred-data.md](referenc
 
 If FRED unavailable after all paths: write `FRED 未连接` and use HYG/LQD ETF spread as **proxy only**.
 
+### Step 1b — Equity breadth pull (mandatory)
+
+Fetch **before** filling §3. Full spec: [equity-structure.md](reference/equity-structure.md).
+
+**Priority**: `python scripts/fetch_breadth.py --as-of <Friday> --json` → historyofmarket DMA JSON → WSJ / Barchart / StockCharts (label source) → only then a "tried and failed" silence note.
+
+| Field | Script JSON | Notes |
+|-------|-------------|-------|
+| 上涨/下跌家数 | `report.advance_decline` | S&P 500 members, not NYSE composite |
+| NH/NL | `report.nh_nl` | 52-week highs / lows among members |
+| >50DMA 占比 | `report.pct_above_50dma` | % members above 50-day SMA |
+| >200DMA 占比 | `report.pct_above_200dma` | % members above 200-day SMA |
+
+**Do not** write `未拉取` / `不可用（未拉取）`. That means the pull was skipped. Style ETFs (IWM, IWD) are a **supplement**, not a substitute for these four rows.
+
 ### Step 2 — Macro & policy recap
 
 **2.1 本周回顾** has two parts — both mandatory:
@@ -91,6 +107,18 @@ Before writing 2.1: web-search the week's **speaker calendars + major headlines*
 
 **2.2 下周日历**: upcoming events with H/M/L impact.
 
+### Step 3 — Equity market structure (mandatory)
+
+Not just index level — **how** the market traded. Fill from Step 1b; spec: [equity-structure.md](reference/equity-structure.md).
+
+- **Breadth**: advance/decline, new highs/lows, % stocks above 50/200 DMA — **numeric**, with as-of and source
+- **Leadership**: cap tier (mega vs mid vs small), growth vs value, quality vs junk
+- **Factor tilts**: momentum, low vol, dividend — what worked / failed
+- **Index composition effect**: top-10 contribution to index return
+- **Flows** (if data available): ETF sector flows, equity fund flows, short interest trend
+
+**Structure read** must say whether breadth **confirms** or **diverges from** SPX/NDX. Index ↑ + NH/DMA% ↓ is a Step 9 candidate.
+
 ### Step 5.2 — Earnings, previews & expectation gaps (mandatory)
 
 Cover **this week's important prints**, **next week's earnings preview**, and **expectation gaps** (共识差 / 指引差 / 定价差). Full rules: [earnings-recall.md](reference/earnings-recall.md).
@@ -104,12 +132,14 @@ Before writing §5.2: scan IR/earnings calendars + Mag7 / index heavyweights / >
 Same requirements as the core weekly scan. Reference:
 
 - Cross-asset & coverage: [coverage-matrix.md](reference/coverage-matrix.md)
+- Equity breadth Step 3: [equity-structure.md](reference/equity-structure.md)
 - AI supply chain Step 4.5: [ai-supply-chain.md](reference/ai-supply-chain.md)
 - Earnings Step 5.2: [earnings-recall.md](reference/earnings-recall.md)
 - Report structure: [weekly-report.md](templates/weekly-report.md)
 
 Key reminders:
 
+- **Step 3** breadth rows (A/D, NH/NL, >50DMA, >200DMA) required from `fetch_breadth.py` (or labeled fallback). Never `未拉取`.
 - **Step 4.5** AI tables required when AI/semi/tech is a driver (default: always include).
 - **Step 5.2** Earnings tables required: 本周已发布 + 下周预告 + 预期差 (or explicit silence notes).
 - **Step 8** Regime must include confidence (H/M/L) and falsifiers — feeds `meta.regime`.
@@ -123,6 +153,7 @@ Before delivery:
 
 - [ ] **2.1.2** filled with news/speeches OR explicit "no threshold event" note
 - [ ] **HY OAS + 10Y-2Y** from FRED (or proxy labeled) with 1W Δ in bp
+- [ ] **Step 3** A/D, NH/NL, >50DMA, >200DMA **numeric** from `fetch_breadth.py` (or labeled fallback after script + HOM + WSJ/Barchart). Never `未拉取` / `不可用（未拉取）`
 - [ ] **Step 4.5** AI tables filled or explicitly "no new print this week"
 - [ ] **Step 5.2** earnings: 本周已发布 + 下周预告 + 预期差 filled OR explicit silence notes
 - [ ] Every price/level has **as-of date** and source class
@@ -184,6 +215,7 @@ When the user wants a **scheduled weekly Cursor Automation**, read the **automat
 - Agent **must** run Steps 0–12 checklist
 - Agent **must** compare to prior run if memory enabled
 - Agent **must** pull HY OAS + 10Y-2Y via FRED before credit/curve fields
+- Agent **must** pull A/D, NH/NL, >50DMA, >200DMA via `scripts/fetch_breadth.py` before writing §3
 - Agent **must** run Step 4.5 AI supply chain tracker
 - Agent **must** research **2.1.2** news/speeches (forums, Fed/ECB remarks, policy headlines) per [macro-news-recall.md](reference/macro-news-recall.md)
 - Agent **must** research **5.2** important earnings, next-week previews, and expectation gaps per [earnings-recall.md](reference/earnings-recall.md)
@@ -218,8 +250,10 @@ When the user wants a **scheduled weekly Cursor Automation**, read the **automat
 - Web ingest API: [web-delivery.md](reference/web-delivery.md)
 - Meta schema: [report-meta.json](templates/report-meta.json)
 - FRED API & MCP: [fred-data.md](reference/fred-data.md)
+- Equity breadth (Step 3): [equity-structure.md](reference/equity-structure.md)
 - AI supply chain: [ai-supply-chain.md](reference/ai-supply-chain.md)
 - FRED fetch script: [scripts/fetch_fred.py](scripts/fetch_fred.py)
+- Breadth fetch script: [scripts/fetch_breadth.py](scripts/fetch_breadth.py)
 - Coverage & thresholds: [coverage-matrix.md](reference/coverage-matrix.md)
 - Macro news & speeches (2.1.2): [macro-news-recall.md](reference/macro-news-recall.md)
 - Earnings & expectation gaps (5.2): [earnings-recall.md](reference/earnings-recall.md)

@@ -163,13 +163,14 @@ Full earnings inclusion rules: [earnings-recall.md](earnings-recall.md).
 ## Data source priority
 
 1. **FRED API / FRED MCP** — HY OAS (`BAMLH0A0HYM2`), 10Y-2Y (`T10Y2Y`), UST yields (`DGS2`, `DGS10`); optional capex macro (`PNFI`, `A34SNO`). See [fred-data.md](fred-data.md).
-2. Exchange / index official closes
-3. **AI vendor pricing pages** — cloud GPU, model API (see [ai-supply-chain.md](ai-supply-chain.md))
-4. Industry research — TrendForce/DRAMeXchange for HBM
-5. Central bank & statistical agency releases
-6. Major financial data terminals / aggregators (verify date)
-7. Company IR / SEC filings for capex, AI commentary, and **earnings/guidance** (Step 5.2)
-8. Earnings consensus aggregators — label source; never invent surprise %
-9. Reputable financial press for narrative — cross-check numbers
+2. **`scripts/fetch_breadth.py`** — S&P 500 A/D, NH/NL, % above 50/200 DMA for §3. See [equity-structure.md](equity-structure.md).
+3. Exchange / index official closes
+4. **AI vendor pricing pages** — cloud GPU, model API (see [ai-supply-chain.md](ai-supply-chain.md))
+5. Industry research — TrendForce/DRAMeXchange for HBM
+6. Central bank & statistical agency releases
+7. Major financial data terminals / aggregators (verify date)
+8. Company IR / SEC filings for capex, AI commentary, and **earnings/guidance** (Step 5.2)
+9. Earnings consensus aggregators — label source; never invent surprise %
+10. Reputable financial press for narrative — cross-check numbers
 
-If live data unavailable in automation run: state lag explicitly; do not guess.
+If live data unavailable in automation run: state lag explicitly; do not guess. For §3, "未拉取" is not an acceptable substitute — follow the fallback chain in [equity-structure.md](equity-structure.md).
