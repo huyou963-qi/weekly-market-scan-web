@@ -5,6 +5,7 @@ Computes from constituent daily closes (Yahoo chart API):
   - advancing / declining / unchanged
   - 52-week new highs / new lows
   - % of members above 50-DMA and 200-DMA
+  - Top 10 weight contribution to the 1W index move (Slickcharts weights)
 
 Cross-checks % above MA vs historyofmarket.com when reachable.
 
@@ -39,6 +40,7 @@ DATASETS_CSV = (
 )
 YAHOO_CHART = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
 HOM_BREADTH = "https://historyofmarket.com/api/sp500/breadth.json"
+SLICKCHARTS_SPX = "https://www.slickcharts.com/sp500"
 MIN_OK = 400
 WORKERS = 8
 SMA_50 = 50
@@ -264,7 +266,181 @@ def _pp_delta(now: float | None, then: float | None) -> float | None:
     return round(now - then, 1)
 
 
-def build_report_strings(now: dict[str, Any], delta: dict[str, Any]) -> dict[str, str]:
+def load_spx_weights() -> tuple[list[dict[str, Any]] | None, str]:
+    try:
+        html = _http_get(SLICKCHARTS_SPX).decode("utf-8", "replace")
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as exc:
+        return None, f"slickcharts fetch failed: {exc}"
+    rows: list[dict[str, Any]] = []
+    for match in re.finditer(
+        r'href="/symbol/([A-Z][A-Z0-9.\-]*)">\1</a></td><td>([0-9.]+)%</td>',
+        html,
+    ):
+        rows.append({"ticker": match.group(1), "weight_pct": float(match.group(2))})
+    if len(rows) < 10:
+        return None, f"slickcharts parsed {len(rows)} weights"
+    return rows, "slickcharts.com/sp500"
+
+
+def _lookup_chart(
+    ticker: str,
+    charts: dict[str, list[tuple[date, float]]],
+) -> list[tuple[date, float]] | None:
+    if ticker in charts:
+        return charts[ticker]
+    alt = ticker.replace(".", "-") if "." in ticker else ticker.replace("-", ".")
+    return charts.get(alt)
+
+
+def _close_on(
+    pairs: list[tuple[date, float]],
+    session: date,
+    *,
+    allow_lag: int = 4,
+) -> float | None:
+    days = [p[0] for p in pairs]
+    idx = _index_on_date(days, session)
+    if idx is None:
+        idx = _idx_on_or_before(days, session)
+        if idx is None or (session - days[idx]).days > allow_lag:
+            return None
+    return pairs[idx][1]
+
+
+def _period_return(
+    pairs: list[tuple[date, float]] | None,
+    start: date,
+    end: date,
+) -> float | None:
+    if not pairs:
+        return None
+    start_px = _close_on(pairs, start)
+    end_px = _close_on(pairs, end)
+    if start_px is None or end_px is None or start_px == 0:
+        return None
+    return end_px / start_px - 1.0
+
+
+def _top10_for_week(
+    weights: list[dict[str, Any]],
+    charts: dict[str, list[tuple[date, float]]],
+    index_pairs: list[tuple[date, float]] | None,
+    start: date,
+    end: date,
+) -> dict[str, Any] | None:
+    index_r = _period_return(index_pairs, start, end)
+    names: list[dict[str, Any]] = []
+    contrib_sum = 0.0
+    contrib_n = 0
+    weight_sum = 0.0
+    for row in weights[:10]:
+        ticker = row["ticker"]
+        weight_pct = float(row["weight_pct"])
+        weight_sum += weight_pct
+        stock_r = _period_return(_lookup_chart(ticker, charts), start, end)
+        contrib = None if stock_r is None else round(weight_pct / 100.0 * stock_r * 100.0, 2)
+        names.append(
+            {
+                "ticker": ticker,
+                "weight_pct": weight_pct,
+                "return_1w_pct": None if stock_r is None else round(stock_r * 100.0, 2),
+                "contrib_ppt": contrib,
+            }
+        )
+        if contrib is not None:
+            contrib_sum += contrib
+            contrib_n += 1
+    if contrib_n < 8:
+        return None
+    index_ppt = None if index_r is None else round(index_r * 100.0, 2)
+    share = None
+    if index_ppt is not None and abs(index_ppt) >= 0.05:
+        share = round(contrib_sum / index_ppt * 100.0, 1)
+    leaders = sorted(
+        [n for n in names if n["contrib_ppt"] is not None],
+        key=lambda n: abs(n["contrib_ppt"]),
+        reverse=True,
+    )[:3]
+    return {
+        "start": start.isoformat(),
+        "end": end.isoformat(),
+        "weight_sum_pct": round(weight_sum, 2),
+        "contrib_ppt": round(contrib_sum, 2),
+        "index_return_pct": index_ppt,
+        "share_of_index_move_pct": share,
+        "names": names,
+        "leaders": [{"ticker": n["ticker"], "contrib_ppt": n["contrib_ppt"]} for n in leaders],
+    }
+
+
+def compute_top10_contribution(
+    constituent_charts: dict[str, list[tuple[date, float]]],
+    index_pairs: list[tuple[date, float]] | None,
+    as_of: date,
+    week_as_of: date,
+    prior_week_as_of: date | None,
+) -> dict[str, Any]:
+    weights, source = load_spx_weights()
+    if not weights:
+        return {"error": source}
+    now = _top10_for_week(weights, constituent_charts, index_pairs, week_as_of, as_of)
+    if not now:
+        return {"error": "top10 returns unavailable", "weights_source": source}
+    prior = None
+    if prior_week_as_of:
+        prior = _top10_for_week(
+            weights, constituent_charts, index_pairs, prior_week_as_of, week_as_of
+        )
+    share_delta = None
+    contrib_delta = None
+    if prior:
+        if now.get("share_of_index_move_pct") is not None and prior.get(
+            "share_of_index_move_pct"
+        ) is not None:
+            share_delta = round(
+                now["share_of_index_move_pct"] - prior["share_of_index_move_pct"], 1
+            )
+        contrib_delta = round(now["contrib_ppt"] - prior["contrib_ppt"], 2)
+    leader_s = "、".join(
+        f"{n['ticker']} {n['contrib_ppt']:+.2f}ppt" for n in now.get("leaders") or []
+    )
+    index_ppt = now.get("index_return_pct")
+    index_s = f"{index_ppt:+.2f}%" if index_ppt is not None else "指数 —"
+    share = now.get("share_of_index_move_pct")
+    share_s = f"（占变动 {share:.0f}%）" if share is not None else ""
+    report = (
+        f"{now['contrib_ppt']:+.2f}ppt / {index_s}{share_s}；"
+        f"Top10 权重 {now['weight_sum_pct']:.1f}%"
+        + (f" — {leader_s}" if leader_s else "")
+    )
+    report_1w = "—"
+    if contrib_delta is not None:
+        report_1w = f"贡献 {contrib_delta:+.2f}ppt"
+        if (
+            share_delta is not None
+            and abs(share_delta) <= 40
+            and now.get("share_of_index_move_pct") is not None
+            and prior
+            and prior.get("index_return_pct") is not None
+            and abs(prior["index_return_pct"]) >= 0.5
+        ):
+            report_1w += f"；占变动 {share_delta:+.0f}ppt"
+    return {
+        "weights_source": source,
+        "weight_as_of": "current slickcharts snapshot (applied to the week)",
+        "now": now,
+        "week_ago": prior,
+        "change_1w": {"contrib_ppt": contrib_delta, "share_of_index_move_pct": share_delta},
+        "report": report,
+        "report_1w": report_1w,
+    }
+
+
+def build_report_strings(
+    now: dict[str, Any],
+    delta: dict[str, Any],
+    top10: dict[str, Any] | None = None,
+) -> dict[str, str]:
     ratio = now.get("ad_ratio")
     ratio_s = f"{ratio:.2f}" if isinstance(ratio, (int, float)) else "—"
     return {
@@ -292,6 +468,10 @@ def build_report_strings(now: dict[str, Any], delta: dict[str, Any]) -> dict[str
             if delta.get("pct_above_200dma") is not None
             else "—"
         ),
+        "top10_contrib": (top10 or {}).get("report")
+        or (top10 or {}).get("error")
+        or "—",
+        "top10_contrib_1w": (top10 or {}).get("report_1w") or "—",
     }
 
 
@@ -337,6 +517,8 @@ def run(as_of: date | None) -> dict[str, Any]:
     fetch_list = list(tickers)
     if "SPY" not in fetch_list:
         fetch_list.append("SPY")
+    if "^GSPC" not in fetch_list:
+        fetch_list.append("^GSPC")
 
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         futs = [pool.submit(fetch_chart, t) for t in fetch_list]
@@ -348,9 +530,10 @@ def run(as_of: date | None) -> dict[str, Any]:
                 charts[ticker] = pairs
 
     spy_pairs = charts.pop("SPY", None) if "SPY" not in tickers else charts.get("SPY")
+    gspc_pairs = charts.pop("^GSPC", None)
     ticker_set = set(tickers)
     constituent_charts = {t: p for t, p in charts.items() if t in ticker_set}
-    fail_constituents = [f for f in failures if f["ticker"] != "SPY"]
+    fail_constituents = [f for f in failures if f["ticker"] not in {"SPY", "^GSPC"}]
 
     if len(constituent_charts) < MIN_OK:
         raise RuntimeError(
@@ -367,6 +550,11 @@ def run(as_of: date | None) -> dict[str, Any]:
     if spy_pairs:
         calendar_charts["SPY"] = spy_pairs
     as_of_used, week_as_of = _session_dates(calendar_charts, target)
+    prior_week_as_of = None
+    if spy_pairs:
+        prior_idx = _idx_on_or_before([p[0] for p in spy_pairs], week_as_of - timedelta(days=7))
+        if prior_idx is not None:
+            prior_week_as_of = spy_pairs[prior_idx][0]
 
     now_rows: list[dict[str, Any]] = []
     week_rows: list[dict[str, Any]] = []
@@ -408,8 +596,21 @@ def run(as_of: date | None) -> dict[str, Any]:
         ),
     }
 
+    index_pairs = gspc_pairs or spy_pairs
+    top10 = compute_top10_contribution(
+        constituent_charts,
+        index_pairs,
+        as_of_used,
+        week_as_of,
+        prior_week_as_of,
+    )
+    if top10.get("error"):
+        warnings_pre = [f"top10 contribution: {top10['error']}"]
+    else:
+        warnings_pre = []
+
     hom = fetch_hom_cross_check(as_of_used)
-    warnings: list[str] = []
+    warnings: list[str] = list(warnings_pre)
     if hom:
         for key, hom_key in (
             ("pct_above_50dma", "pct_above_50dma"),
@@ -437,17 +638,20 @@ def run(as_of: date | None) -> dict[str, Any]:
         "price_source": "Yahoo Finance chart v8 (daily close)",
         "as_of": as_of_used.isoformat(),
         "week_ago_as_of": week_as_of.isoformat() if week_as_of else None,
+        "index_proxy": "^GSPC" if gspc_pairs else "SPY",
         "now": now,
         "week_ago": week,
         "change_1w": delta,
+        "top10_contribution": top10,
         "cross_check": hom,
         "warnings": warnings,
-        "report": build_report_strings(now, delta),
+        "report": build_report_strings(now, delta, top10),
         "notes": [
             "A/D and NH/NL are S&P 500 members, not NYSE composite.",
             "New high/low: close at/through the max/min of the prior 252 sessions.",
             "DMA% uses simple moving average of daily closes.",
             "StockCharts/Barchart/historyofmarket DMA series can differ by several ppt; use this script as source of record.",
+            "Top10 contribution uses current Slickcharts weights × 1W returns (weight snapshot is not point-in-time).",
         ],
     }
 
@@ -513,6 +717,13 @@ def main() -> None:
         if d200 is not None
         else f"- >200DMA: {p200}%"
     )
+    top10 = results.get("top10_contribution") or {}
+    if top10.get("report"):
+        print(f"- Top10 contrib: {top10['report']}")
+        if top10.get("report_1w") and top10["report_1w"] != "—":
+            print(f"  1W Δ {top10['report_1w']}")
+    elif top10.get("error"):
+        print(f"- Top10 contrib: ERROR — {top10['error']}")
     hom = results.get("cross_check")
     if hom:
         print(

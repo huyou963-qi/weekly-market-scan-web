@@ -1,6 +1,6 @@
 # Equity Market Structure — Breadth Data (Step 3)
 
-Mandatory for **§3 股市结构**: advancing/declining, NH/NL, % of stocks above 50-DMA and 200-DMA.
+Mandatory for **§3 股市结构**: advancing/declining, NH/NL, % of stocks above 50-DMA and 200-DMA, and Top10 contribution to the index move.
 
 These rows are **not optional**. "未拉取" / "不可用（未拉取）" is a process failure, not an acceptable silence note.
 
@@ -20,6 +20,7 @@ Index level can rise on a handful of mega-caps. Breadth tells whether the tape c
 | NH/NL | Are 52-week highs expanding or is the index making highs without participation? |
 | >50DMA 占比 | Short-term trend participation (midline ~50%) |
 | >200DMA 占比 | Intermediate bull/bear structure (often >60% in a healthy bull) |
+| 指数涨幅中 Top10 贡献 | How much of the SPX 1W move came from the 10 largest weights? |
 
 Style/factor proxies (QQQ vs IWD, SPY vs IWM) **supplement** these rows; they do **not** replace them.
 
@@ -57,6 +58,7 @@ Paste `report.*` into the §3 table:
 | NH/NL | `report.nh_nl` | `report.nh_nl_1w` |
 | >50DMA 占比 | `report.pct_above_50dma` | `report.pct_above_50dma_1w` |
 | >200DMA 占比 | `report.pct_above_200dma` | `report.pct_above_200dma_1w` |
+| 指数涨幅中 Top10 贡献 | `report.top10_contrib` | `report.top10_contrib_1w` |
 
 Also copy `as_of` into the section as-of note. If `warnings` is non-empty, mention the cross-check gap in **Structure read** (do not drop the computed numbers).
 
@@ -82,21 +84,23 @@ Try in order until a **numeric** print exists for the missing row:
 | NH/NL | WSJ Markets Diary (NYSE + Nasdaq new highs/lows); StockCharts `$NYHL` / `$NAHL`; Barchart `$NYHGH` `$NYLOW` |
 | >50DMA | Barchart `$S5FI`; StockCharts `$SPXA50R` |
 | >200DMA | Barchart `$S5TH` (S&P 500 stocks above 200-day); StockCharts `$SPXA200R` |
+| Top10 贡献 | Slickcharts [S&P 500](https://www.slickcharts.com/sp500) weights + weekly returns; or Mag7/top weights × 1W return as labeled estimate |
 
 If the fallback universe is NYSE/Nasdaq rather than SPX, **say so** in the 数值 cell.
 
 ### 4. After all paths fail
 
-Keep the row. Write `数据不可用（已尝试 script / HOM / WSJ / Barchart）` plus which path failed. Still fill **Style / factor** from sector ETFs. Still write **Structure read** using whatever did print (RUT vs SPX is a *proxy comment*, not a substitute for the four rows).
+Keep the row. Write `数据不可用（已尝试 script / HOM / WSJ / Barchart）` plus which path failed. Still fill **Style / factor** from sector ETFs. Still write **Structure read** using whatever did print (RUT vs SPX is a *proxy comment*, not a substitute for the five rows).
 
 ---
 
 ## Definitions (script)
 
-- **Advancer / decliner**: Friday close vs prior session close.
+- **Advancer / decliner**: Friday close vs prior session close (S&P 500 members). `1W Δ` is that Friday snapshot vs the prior Friday snapshot — not NYSE composite.
 - **New high / new low**: Friday close at or through the max/min of the prior 252 sessions (S&P 500 members).
 - **% above 50/200 DMA**: last close vs simple moving average of daily closes; members with insufficient history are dropped from that percentage only.
-- **1W Δ**: same snapshot on the session ≤ Friday−7d.
+- **Top10 contribution**: current Slickcharts SPX weights × each name's Friday-to-prior-Friday return. Contribution in index ppt ≈ `weight × return`. Share of index move = Top10 contrib ppt / SPX (or SPY) 1W ppt. Weights are **not** point-in-time as-of Monday; label the source.
+- **1W Δ** (other rows): same snapshot on the session ≤ Friday−7d.
 
 ---
 
@@ -108,6 +112,7 @@ Keep the row. Write `数据不可用（已尝试 script / HOM / WSJ / Barchart�
 | NH vs NL | NH >> NL, net rising | Index high + NH fading / NL rising |
 | >50DMA | Rising through 50–70% | Index high + % falling (divergence) |
 | >200DMA | Stable/rising above ~60% | Breaking toward 50% with index still high |
+| Top10 占变动 | Share of SPX move well below Top10 weight on an up week (broad tape) | Share >> weight while index makes highs (narrow leadership) |
 
 Index ↑ + breadth ↓ is a Step 9 anomaly candidate.
 
@@ -117,4 +122,5 @@ Index ↑ + breadth ↓ is a Step 9 anomaly candidate.
 
 - Numbers have **as-of date** and source class (`computed Yahoo/SPX` / `historyofmarket` / `WSJ` / `Barchart` / `StockCharts`).
 - Do not fabricate NH/NL or DMA percentages from "index at highs → 占比偏高".
+- Do not replace Top10 contribution with a Mag7 narrative unless the script/Slickcharts path failed and the estimate is labeled.
 - Do not skip the script because FRED / earnings / AI steps already ran.

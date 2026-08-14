@@ -83,12 +83,13 @@ Fetch **before** filling §3. Full spec: [equity-structure.md](reference/equity-
 
 | Field | Script JSON | Notes |
 |-------|-------------|-------|
-| 上涨/下跌家数 | `report.advance_decline` | S&P 500 members, not NYSE composite |
+| 上涨/下跌家数 | `report.advance_decline` | S&P 500 members, Friday vs prior session (not NYSE composite) |
 | NH/NL | `report.nh_nl` | 52-week highs / lows among members |
 | >50DMA 占比 | `report.pct_above_50dma` | % members above 50-day SMA |
 | >200DMA 占比 | `report.pct_above_200dma` | % members above 200-day SMA |
+| 指数涨幅中 Top10 贡献 | `report.top10_contrib` | Slickcharts weights × 1W returns; ppt of SPX + share of move |
 
-**Do not** write `未拉取` / `不可用（未拉取）`. That means the pull was skipped. Style ETFs (IWM, IWD) are a **supplement**, not a substitute for these four rows.
+**Do not** write `未拉取` / `不可用（未拉取）`. That means the pull was skipped. Style ETFs (IWM, IWD) are a **supplement**, not a substitute for these five rows.
 
 ### Step 2 — Macro & policy recap
 
@@ -139,7 +140,7 @@ Same requirements as the core weekly scan. Reference:
 
 Key reminders:
 
-- **Step 3** breadth rows (A/D, NH/NL, >50DMA, >200DMA) required from `fetch_breadth.py` (or labeled fallback). Never `未拉取`.
+- **Step 3** breadth rows (A/D, NH/NL, >50DMA, >200DMA, Top10 contrib) required from `fetch_breadth.py` (or labeled fallback). Never `未拉取`.
 - **Step 4.5** AI tables required when AI/semi/tech is a driver (default: always include).
 - **Step 5.2** Earnings tables required: 本周已发布 + 下周预告 + 预期差 (or explicit silence notes).
 - **Step 8** Regime must include confidence (H/M/L) and falsifiers — feeds `meta.regime`.
@@ -153,7 +154,7 @@ Before delivery:
 
 - [ ] **2.1.2** filled with news/speeches OR explicit "no threshold event" note
 - [ ] **HY OAS + 10Y-2Y** from FRED (or proxy labeled) with 1W Δ in bp
-- [ ] **Step 3** A/D, NH/NL, >50DMA, >200DMA **numeric** from `fetch_breadth.py` (or labeled fallback after script + HOM + WSJ/Barchart). Never `未拉取` / `不可用（未拉取）`
+- [ ] **Step 3** A/D, NH/NL, >50DMA, >200DMA, Top10 contribution **numeric** from `fetch_breadth.py` (or labeled fallback after script + HOM + WSJ/Barchart). Never `未拉取` / `不可用（未拉取）`
 - [ ] **Step 4.5** AI tables filled or explicitly "no new print this week"
 - [ ] **Step 5.2** earnings: 本周已发布 + 下周预告 + 预期差 filled OR explicit silence notes
 - [ ] Every price/level has **as-of date** and source class
@@ -215,7 +216,7 @@ When the user wants a **scheduled weekly Cursor Automation**, read the **automat
 - Agent **must** run Steps 0–12 checklist
 - Agent **must** compare to prior run if memory enabled
 - Agent **must** pull HY OAS + 10Y-2Y via FRED before credit/curve fields
-- Agent **must** pull A/D, NH/NL, >50DMA, >200DMA via `scripts/fetch_breadth.py` before writing §3
+- Agent **must** pull A/D, NH/NL, >50DMA, >200DMA, Top10 contribution via `scripts/fetch_breadth.py` before writing §3
 - Agent **must** run Step 4.5 AI supply chain tracker
 - Agent **must** research **2.1.2** news/speeches (forums, Fed/ECB remarks, policy headlines) per [macro-news-recall.md](reference/macro-news-recall.md)
 - Agent **must** research **5.2** important earnings, next-week previews, and expectation gaps per [earnings-recall.md](reference/earnings-recall.md)

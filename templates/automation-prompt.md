@@ -29,11 +29,11 @@ Before writing Step 1 or Step 7 credit/curve fields:
 
 ### 2. Equity structure / breadth — Step 3
 
-Before writing §3 (NH/NL, >50DMA, >200DMA, 上涨/下跌家数):
+Before writing §3 (NH/NL, >50DMA, >200DMA, 上涨/下跌家数, Top10 贡献):
 
 1. Run `python scripts/fetch_breadth.py --as-of <Friday> --json`
 2. If that fails: `https://historyofmarket.com/api/sp500/breadth.json` for DMA % only, then WSJ Markets Diary / Barchart `$S5FI` `$S5TH` / StockCharts `$SPXA50R` `$SPXA200R` `$NYHL` for remaining rows.
-3. Paste `report.advance_decline`, `report.nh_nl`, `report.pct_above_50dma`, `report.pct_above_200dma` (and 1W Δ fields). Spec: [equity-structure.md](../reference/equity-structure.md).
+3. Paste `report.advance_decline`, `report.nh_nl`, `report.pct_above_50dma`, `report.pct_above_200dma`, `report.top10_contrib` (and 1W Δ fields). Spec: [equity-structure.md](../reference/equity-structure.md).
 
 **Never** write `未拉取` / `不可用（未拉取）`. Style ETFs are not a substitute. If every path fails, write `数据不可用（已尝试 script / HOM / WSJ / Barchart）`.
 
@@ -73,7 +73,7 @@ Compare to last run: regime, rotation, AI/capex trends, credit levels, earnings-
 1. Executive summary — 5 bullets
 2. Cross-asset dashboard — FRED HY OAS + T10Y2Y
 3. Macro recap — **2.1.1 data + 2.1.2 news/speeches** + next-week calendar (H/M/L)
-4. Equity market structure — **numeric** A/D, NH/NL, >50DMA, >200DMA (`fetch_breadth.py`)
+4. Equity market structure — **numeric** A/D, NH/NL, >50DMA, >200DMA, Top10 contrib (`fetch_breadth.py`)
 5. GICS sector rotation + sub-industry highlights
 6. AI supply chain 4.5 + synthesis
 7. Event impact matrix + **5.2 earnings / preview / expectation gaps**

@@ -163,7 +163,7 @@ Full earnings inclusion rules: [earnings-recall.md](earnings-recall.md).
 ## Data source priority
 
 1. **FRED API / FRED MCP** — HY OAS (`BAMLH0A0HYM2`), 10Y-2Y (`T10Y2Y`), UST yields (`DGS2`, `DGS10`); optional capex macro (`PNFI`, `A34SNO`). See [fred-data.md](fred-data.md).
-2. **`scripts/fetch_breadth.py`** — S&P 500 A/D, NH/NL, % above 50/200 DMA for §3. See [equity-structure.md](equity-structure.md).
+2. **`scripts/fetch_breadth.py`** — S&P 500 A/D, NH/NL, % above 50/200 DMA, Top10 contribution for §3. See [equity-structure.md](equity-structure.md).
 3. Exchange / index official closes
 4. **AI vendor pricing pages** — cloud GPU, model API (see [ai-supply-chain.md](ai-supply-chain.md))
 5. Industry research — TrendForce/DRAMeXchange for HBM
