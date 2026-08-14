@@ -1,0 +1,36 @@
+{
+  "note": "Events dated by release day. Only use events with date <= weekEnding when writing a report.",
+  "events": [
+    {"date": "2026-01-02", "event": "NYSE 开市；元旦假期后首个完整交易日", "tier": 2},
+    {"date": "2026-01-09", "event": "12月非农 Employment Situation", "tier": 1},
+    {"date": "2026-01-13", "event": "12月 CPI", "tier": 1},
+    {"date": "2026-01-14", "event": "12月 PPI", "tier": 2},
+    {"date": "2026-01-19", "event": "马丁·路德·金日（美股休市）", "tier": 3},
+    {"date": "2026-01-28", "event": "FOMC 决议（1/27–28 会议）", "tier": 1},
+    {"date": "2026-02-06", "event": "1月非农 Employment Situation", "tier": 1},
+    {"date": "2026-02-13", "event": "1月 CPI", "tier": 1},
+    {"date": "2026-02-16", "event": "总统日（美股休市）", "tier": 3},
+    {"date": "2026-02-18", "event": "1月 FOMC 会议纪要发布", "tier": 2},
+    {"date": "2026-03-06", "event": "2月非农 Employment Situation", "tier": 1},
+    {"date": "2026-03-11", "event": "2月 CPI", "tier": 1},
+    {"date": "2026-03-18", "event": "FOMC 决议 + SEP/点阵图（3/17–18）", "tier": 1},
+    {"date": "2026-04-02", "event": "耶稣受难日前最后交易日；3月非农于 4/3（休市日）发布", "tier": 1},
+    {"date": "2026-04-03", "event": "耶稣受难日（美股休市）；3月非农发布", "tier": 1},
+    {"date": "2026-04-08", "event": "3月 FOMC 会议纪要", "tier": 2},
+    {"date": "2026-04-10", "event": "3月 CPI", "tier": 1},
+    {"date": "2026-04-14", "event": "3月 PPI；Q1 财报季加速", "tier": 2},
+    {"date": "2026-04-29", "event": "FOMC 决议（4/28–29）；投票分歧较大；鲍威尔任内最后主席会议", "tier": 1},
+    {"date": "2026-04-29", "event": "MSFT/GOOGL/META/AMZN 等 hyperscaler Q1 财报与 capex 上调", "tier": 1},
+    {"date": "2026-05-01", "event": "AAPL 等科技财报后续；半导体重估", "tier": 2},
+    {"date": "2026-05-05", "event": "3月 JOLTS", "tier": 2},
+    {"date": "2026-05-07", "event": "Q1 生产率与成本初值", "tier": 2},
+    {"date": "2026-05-08", "event": "4月非农 +115k（强于预期）；失业率 4.3%", "tier": 1}
+  ],
+  "themes_by_month": {
+    "2026-01": "开年定价：通胀粘性 vs 就业；FOMC 1月末定调",
+    "2026-02": "数据真空与纪要解读；总统日短周",
+    "2026-03": "2月就业/CPI + 3月 FOMC/SEP 重定价",
+    "2026-04": "耶稣受难日短周；CPI；Q1 财报；月末 FOMC 分裂投票 + AI capex 上修",
+    "2026-05": "非农强劲；半导体/HBM 叙事；CPI 待验（5/12）"
+  }
+}

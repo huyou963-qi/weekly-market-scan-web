@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-07-27T01:47:24.663167Z",
+  "weeks": [
+    {
+      "weekEnding": "2026-01-02",
+      "calendarFriday": "2026-01-02",
+      "priorWeekEnding": "2025-12-26"
+    },
+    {
+      "weekEnding": "2026-01-09",
+      "calendarFriday": "2026-01-09",
+      "priorWeekEnding": "2026-01-02"
+    },
+    {
+      "weekEnding": "2026-01-16",
+      "calendarFriday": "2026-01-16",
+      "priorWeekEnding": "2026-01-09"
+    },
+    {
+      "weekEnding": "2026-01-23",
+      "calendarFriday": "2026-01-23",
+      "priorWeekEnding": "2026-01-16"
+    },
+    {
+      "weekEnding": "2026-01-30",
+      "calendarFriday": "2026-01-30",
+      "priorWeekEnding": "2026-01-23"
+    },
+    {
+      "weekEnding": "2026-02-06",
+      "calendarFriday": "2026-02-06",
+      "priorWeekEnding": "2026-01-30"
+    },
+    {
+      "weekEnding": "2026-02-13",
+      "calendarFriday": "2026-02-13",
+      "priorWeekEnding": "2026-02-06"
+    },
+    {
+      "weekEnding": "2026-02-20",
+      "calendarFriday": "2026-02-20",
+      "priorWeekEnding": "2026-02-13"
+    },
+    {
+      "weekEnding": "2026-02-27",
+      "calendarFriday": "2026-02-27",
+      "priorWeekEnding": "2026-02-20"
+    },
+    {
+      "weekEnding": "2026-03-06",
+      "calendarFriday": "2026-03-06",
+      "priorWeekEnding": "2026-02-27"
+    },
+    {
+      "weekEnding": "2026-03-13",
+      "calendarFriday": "2026-03-13",
+      "priorWeekEnding": "2026-03-06"
+    },
+    {
+      "weekEnding": "2026-03-20",
+      "calendarFriday": "2026-03-20",
+      "priorWeekEnding": "2026-03-13"
+    },
+    {
+      "weekEnding": "2026-03-27",
+      "calendarFriday": "2026-03-27",
+      "priorWeekEnding": "2026-03-20"
+    },
+    {
+      "weekEnding": "2026-04-02",
+      "calendarFriday": "2026-04-03",
+      "priorWeekEnding": "2026-03-27"
+    },
+    {
+      "weekEnding": "2026-04-10",
+      "calendarFriday": "2026-04-10",
+      "priorWeekEnding": "2026-04-02"
+    },
+    {
+      "weekEnding": "2026-04-17",
+      "calendarFriday": "2026-04-17",
+      "priorWeekEnding": "2026-04-10"
+    },
+    {
+      "weekEnding": "2026-04-24",
+      "calendarFriday": "2026-04-24",
+      "priorWeekEnding": "2026-04-17"
+    },
+    {
+      "weekEnding": "2026-05-01",
+      "calendarFriday": "2026-05-01",
+      "priorWeekEnding": "2026-04-24"
+    },
+    {
+      "weekEnding": "2026-05-08",
+      "calendarFriday": "2026-05-08",
+      "priorWeekEnding": "2026-05-01"
+    }
+  ],
+  "count": 19
+}
