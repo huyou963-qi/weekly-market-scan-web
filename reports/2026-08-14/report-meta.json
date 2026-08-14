@@ -1,0 +1,14 @@
+{
+  "weekEnding": "2026-08-14",
+  "title": "CPI/PPI温和+广度改善，油价回升；CSCO利润率成焦点",
+  "regime": "Soft-landing / Breadth-led consolidation (oil overlay)",
+  "regimeConfidence": "M",
+  "scope": "Global",
+  "generatedAt": "2026-08-14 12:50 CST",
+  "summaryOneLiner": "FROM XLY/Mega-cap软件 → TO XLE/内存与AI基建；关键风险=Hormuz油价溢价再抬升通胀预期",
+  "kpis": [
+    { "label": "HY OAS", "value": "271bp", "delta": "-4bp", "dir": "down" },
+    { "label": "10Y-2Y", "value": "0.48%", "delta": "+4bp", "dir": "up" },
+    { "label": "VIX", "value": "14.63", "delta": "-0.27", "dir": "down" }
+  ]
+}
